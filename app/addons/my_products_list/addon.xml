@@ -20,15 +20,45 @@
 		<item lang="el" id="download_csv">Λήψη csv</item>
 		<item lang="en" id="download_xls">Download xls</item>	
 		<item lang="el" id="download_xls">Λήψη xls</item>
+		<item lang="en" id="download_csv_demo">Download demo csv</item>	
+		<item lang="el" id="download_csv_demo">Λήψη προτύπου csv</item>
+		<item lang="en" id="download_xls_demo">Download demo xls</item>	
+		<item lang="el" id="download_xls_demo">Λήψη προτύπου xls</item>
 		<item lang="en" id="download_product_list">Download product list</item>	
 		<item lang="el" id="download_product_list">Λήψη λίστας προϊόντων</item>
-		<item lang="en" id="text_download_product_list"><p>You can download all the products available, in .csv or .xls format by using the following links.</p><p>The downloaded file can be used to add the desired products to cart through the following form.</p></item>	
-		<item lang="el" id="text_download_product_list"><p>Μπορείτε να πραγματοποιήσετε λήψη όλων των διαθέσιμων προϊόντων σε μορφή csv ή xls μέσω των παρακάτω συνδέσμων.</p><p>Μετά τη λήψη, μπορείτε να ενημερώσετε το αρχείο ώστε να το χρησιμοποιήσετε στην ακόλουθη φόρμα.</p></item>
-		
+		<item lang="en" id="products_list_empty">Product list is empty</item>	
+		<item lang="el" id="products_list_empty">Η λίστα προϊόντων είναι κενή</item>
+		<item lang="en" id="products_list_no_code">No product code</item>	
+		<item lang="el" id="products_list_no_code">Δεν υπάρχει κωδικός προϊόντος</item>
+		<item lang="en" id="products_list_wrong_quantity">The amount is wrong</item>	
+		<item lang="el" id="products_list_wrong_quantity">Η ποσότητα είναι λάθος</item>
+		<item lang="en" id="products_list_wrong_code">Wrong product code</item>	
+		<item lang="el" id="products_list_wrong_code">Λάθος κωδικός προϊόντος</item>
+		<item lang="en" id="no_file_selected">No file selected</item>	
+		<item lang="el" id="no_file_selected">Δεν επιλέξατε αρχείο</item>
+		<item lang="en" id="Products_list_column_amount">Amount</item>	
+		<item lang="el" id="Products_list_column_amount">Ποσότητα</item>
+		<item lang="en" id="Products_list_column_code">Code</item>	
+		<item lang="el" id="Products_list_column_code">Κωδικός</item>
+		<item lang="en" id="Products_list_column_product">Description</item>	
+		<item lang="el" id="Products_list_column_product">Περιγραφή</item>
+		<item lang="en" id="products_list_contains_errors">Product list contains errors</item>	
+		<item lang="el" id="products_list_contains_errors">Η λίστας αγοράς περιέχει σφάλματα</item>
+		<item lang="en" id="products_list_file_error">File error</item>	
+		<item lang="el" id="products_list_file_error">Σφάλμα αρχείου λίστας αγοράς</item>
+		<item lang="en" id="products_list_add_product">Add product</item>	
+		<item lang="el" id="products_list_add_product">Προσθήκη προϊόντος</item>
+		<item lang="en" id="text_download_product_list">You can download all the products available, in .csv or .xls format by using the following links.</item>	
+		<item lang="el" id="text_download_product_list">Μπορείτε να πραγματοποιήσετε λήψη όλων των διαθέσιμων προϊόντων σε μορφή csv ή xls μέσω των παρακάτω συνδέσμων. </item>
 		<item lang="en" id="upload_product_list">Upload product list</item>	
 		<item lang="el" id="upload_product_list">Μεταφόρτωση λίστας αγοράς</item>
-		<item lang="en" id="text_upload_product_list"><p>Update the product quantities in the downloaded list.</p><p>Upload the updated file by using the 'upload file' link.</p><p>Click on the 'add to cart' button.</p></item>	
-		<item lang="el" id="text_upload_product_list"><p>Ενημερώστε την ποσότητα ανά προϊόν στο αρχείο που κατεβάσατε. Αν δεν επιθυμείτε να προσθέσετε στο καλάθι σας ορισμένα προϊόντα, μπορείτε να τα διαγράψετε, ή να αφήσετε την ποσότητα κενή.</p><p>Επιλέξτε το αρχείο το αρχείο μέσω του συνδέσμου 'Ανέβασμα αρχείου'.</p></p>Κάντε κλικ στο κουμπί 'προσθήκη στο καλάθι'.</p></item>
+		<item lang="en" id="text_upload_product_list">Download and update either of the two demo files provided. Upload the updated file by using the 'upload file' link. Click on the 'add to cart' button.</item>	
+		<item lang="el" id="text_upload_product_list">Κατεβάστε και ενημερώστε έναν απ'τους δύο τύπους πρότυπων αρχείων μέσω των αντίστοιχων συνδέσμων. Επιλέξτε το αρχείο το αρχείο μέσω του συνδέσμου 'Ανέβασμα αρχείου'. Κάντε κλικ στο κουμπί 'προσθήκη στο καλάθι'.</item>
+		<item lang="en" id="manual_product_list">Manual product list</item>	
+		<item lang="el" id="manual_product_list">Εισαγωγή λίστας αγοράς</item>
+		<item lang="en" id="text_manual_product_list">Update the product quantities in the downloaded list.Upload the updated file by using the 'upload file' link.Click on the 'add to cart' button.</item>	
+		<item lang="el" id="text_upload_product_list">Εισάγετε στη φόρμα τους κωδικούς και την ποσότητα ανά προϊόν που επιθυμείτε από το αρχείο της λίστας προϊόντων που κατεβάσατε. Μπορείτε να προσθέσετε κωδικούς μέσω του κουμπιού "Προσθήκη Προϊόντος" και να αφαιρέσετε μέσω του κουμπιού "-" που υπάρχει σε κάθε γραμμή. Κάντε κλικ στο κουμπί 'Προσθήκη στο Καλάθι'.</item>
+		<item lang="en" id="confirm_product_list">Confirm and add</item>	
+		<item lang="el" id="confirm_product_list">Επιβεβαίωση προσθήκης</item>
     </language_variables>
-	
 </addon>

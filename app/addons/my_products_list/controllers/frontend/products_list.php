@@ -7,17 +7,120 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
 if (empty($auth['user_id']) || ($auth['account_type']!='B'))
 	return array(CONTROLLER_STATUS_DENIED);
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
+	fn_add_breadcrumb(__('products_list'), 'products_list.view');	
+	
     if ($mode == 'upload') { 
-		$files = fn_filter_uploaded_data('products_list_file');
-		fn_print_r($files);
+		fn_add_breadcrumb(__('upload_product_list'));
 		
-		return array(CONTROLLER_STATUS_OK, 'products_list.view');
+		$files = fn_filter_uploaded_data('products_list_file', array('csv', 'xls', 'xlsx', 'ods'));
+		
+		if (empty($files)) {
+			fn_set_notification('W', __('warning'), __('no_file_selected'));
+			return array(CONTROLLER_STATUS_REDIRECT, 'products_list.view');
+		} else {
+			$ext_original = fn_get_file_ext($files[0]['name']);
+			$file_tmp = $files[0]['path'];
+			$file = substr($file_tmp, 0, -4) . $ext_original;
+			fn_rename($file_tmp,$file);
+			try {
+				$spreadsheet = IOFactory::load($file);
+				$sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+				if ($sheetData[1]['B'] == __('Products_list_column_amount'))
+					unset($sheetData[1]);
+				
+				$error = false;
+				
+				list($product_list, $product_data) = fn_check_product_list($sheetData);
+				
+				Tygh::$app['view']->assign('product_list', $product_list);
+
+				foreach ($product_list as $pl) {
+					if (!empty($pl['error'])) {
+						$error = true;
+						break;
+					}
+				}
+				
+				if ($error) {
+					fn_set_notification('E', __('error'), __('products_list_contains_errors'));
+				} else if (empty($product_data)) {
+					fn_set_notification('W', __('warning'), __('products_list_empty'));
+					return array(CONTROLLER_STATUS_REDIRECT, 'products_list.view');
+				} else {
+					fn_add_to_cart_product_list($product_data, $auth);
+					return array(CONTROLLER_STATUS_OK, 'products_list.view');
+				}
+				
+			} catch (InvalidArgumentException $e) {
+				fn_set_notification('E', __('error'), __('products_list_file_error'));
+				return array(CONTROLLER_STATUS_REDIRECT, 'products_list.view');
+			}
+			
+			fn_rm($file);
+		}
+		
+		return array(CONTROLLER_STATUS_OK);
+	} else if ($mode == 'manual') {
+			fn_add_breadcrumb(__('manual_product_list'));
+			
+			$error = false;
+			
+			list($product_list, $product_data) = fn_check_product_list($_REQUEST['product_list']);
+			
+			Tygh::$app['view']->assign('product_list', $product_list);
+			
+			foreach ($product_list as $pl) {
+				if (!empty($pl['error'])) {
+					$error = true;
+					break;
+				}
+			}
+			
+			if ($error) {
+				fn_set_notification('E', __('error'), __('products_list_contains_errors'));
+			} else if (empty($product_data)) {
+				fn_set_notification('W', __('warning'), __('products_list_empty'));
+				return array(CONTROLLER_STATUS_REDIRECT, 'products_list.view');
+			} else {
+				fn_add_to_cart_product_list($product_data, $auth);
+				return array(CONTROLLER_STATUS_OK, 'products_list.view');
+			}
+		
+			return array(CONTROLLER_STATUS_OK);
+	
+	} else if ($mode == 'confirm') {
+		fn_add_breadcrumb(__('confirm_product_list'));
+	
+		$error = false;
+		
+		list($product_list, $product_data) = fn_check_product_list($_REQUEST['product_list']);
+		
+		Tygh::$app['view']->assign('product_list', $product_list);
+		
+		foreach ($product_list as $pl) {
+			if (!empty($pl['error'])) {
+				$error = true;
+				break;
+			}
+		}
+		
+		if ($error) {
+			fn_set_notification('E', __('error'), __('products_list_contains_errors'));
+		} else if (empty($product_data)) {
+			fn_set_notification('W', __('warning'), __('products_list_empty'));
+			return array(CONTROLLER_STATUS_REDIRECT, 'products_list.view');
+		} else {
+			fn_add_to_cart_product_list($product_data, $auth);
+			return array(CONTROLLER_STATUS_OK, 'products_list.view');
+		}
+		
+		return array(CONTROLLER_STATUS_OK);
 	}
 	
-} elseif ($mode == 'csv' || $mode == 'xls' ) {
-	$products = fn_get_products(array());
+} else if ($mode == 'csv' || $mode == 'xls' || $mode == 'csv_demo' || $mode == 'xls_demo') {
 	
 	$spreadsheet = new Spreadsheet();
 	
@@ -26,34 +129,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		->setTitle('Product List');
 	
 	$spreadsheet->setActiveSheetIndex(0);
-	$spreadsheet->getActiveSheet()->setCellValue('A1', 'Βιβλίο');
-	$spreadsheet->getActiveSheet()->setCellValue('B1', 'Κωδικός');
-	$spreadsheet->getActiveSheet()->setCellValue('C1', 'Τιμή');
-	$spreadsheet->getActiveSheet()->setCellValue('D1', 'Ποσότητα');
+	$spreadsheet->getActiveSheet()->setCellValue('A1', __('Products_list_column_code'));
+	
+	if ($mode == 'csv' || $mode == 'xls') {
+		$spreadsheet->getActiveSheet()->setCellValue('B1', __('Products_list_column_product'));
+	} else {
+		$spreadsheet->getActiveSheet()->setCellValue('B1', __('Products_list_column_amount'));
+	}
+	//$spreadsheet->getActiveSheet()->setCellValue('C1', __('Products_list_column_price'));
+	//$spreadsheet->getActiveSheet()->setCellValue('D1', __('Products_list_column_quantity'));
+	
+	$spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+	$spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+	//$spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
 	
 	$i=1;
 	
 	$file = fn_create_temp_file();	
 	$filename = 'Supercourse_list';
+	if ($mode == 'csv_demo' || $mode == 'xls_demo') {
+		$filename.='_demo';
+	}
 	
-	foreach($products[0] as $product) {
-		$i++;
-		$spreadsheet->getActiveSheet()->setCellValue('A' . $i, $product['product'])
-			->setCellValue('B' . $i, $product['product_code'])
-			->setCellValue('C' . $i, $product['price']);
-	}	
 	
-	if ($mode == 'csv' ) {
+	if ($mode == 'csv' || $mode == 'xls') {
+		$products = fn_get_products(array());
+		$products = $products[0];
+		//fn_my_product_packages_get_retail_data($products);
+		
+		foreach($products as $product) {
+			$i++;
+			$spreadsheet->getActiveSheet()->setCellValue('A' . $i, $product['product_code'])
+				->setCellValue('B' . $i, $product['product']);
+			//	->setCellValue('C' . $i, fn_format_price($product['retail_data']['price']));
+		}	
+		
+	}
+	
+	if ($mode == 'csv' || $mode == 'csv_demo') {
 		$writer = IOFactory::createWriter($spreadsheet, 'Csv')->setDelimiter(',')
 			->setEnclosure('"')
 			->setSheetIndex(0);
-		//$file.='.csv';
+		
 		$filename.='.csv';
 		
 	} else { // xls
 		$writer = IOFactory::createWriter($spreadsheet, 'Xls');
 	
-		//$file.='.xls';
 		$filename.='.xls';
 	
 	}
@@ -63,4 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	fn_get_file($file, $filename, true);
 	
 	exit;
+	
+} else if ($mode == 'view') {
+	fn_add_breadcrumb(__('products_list'));	
 }
