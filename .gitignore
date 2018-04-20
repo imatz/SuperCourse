@@ -1,0 +1,6 @@
+/images/
+/var/
+/workshop/
+*.zip
+*.log
+.vagrant/
