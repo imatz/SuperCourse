@@ -4557,7 +4557,13 @@ function fn_order_placement_routines($action = '', $order_id = 0, $force_notific
                 if ($action == 'repay') {
                     fn_set_notification('N', __('congratulations'), __('text_order_repayed_successfully'));
                 } else {
-                    fn_set_notification('N', __('order_placed'), __('text_order_placed_successfully'));
+
+		/*****Stathis Liampas-- prosthiki emfanhshs order_id stin eidopoihsh otan oloklirwnetai mia paraggelia************************/
+		//mexri twra emfanizotan: [order_id] kai oxi ton arithmo paraggelias
+		//fn_set_notification('N', __('order_placed'), __('text_order_placed_successfully'));
+		fn_set_notification('N', __('order_placed'), __('text_order_placed_successfully', ["[order_id]" => $order_info['order_id']]));
+		/*****Stathis Liampas-- mexri edw*********************************************************************************************/
+
                 }
             } elseif ($status == STATUS_BACKORDERED_ORDER) {
                 fn_set_notification('W', __('important'), __('text_order_backordered'));

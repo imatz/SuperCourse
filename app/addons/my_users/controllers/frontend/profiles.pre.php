@@ -16,6 +16,8 @@ use Tygh\Registry;
 use Tygh\Session;
 use Tygh\Mailer;
 
+session_start();
+
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -37,14 +39,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
   } else if ($mode == 'choose') {
     if(isset($_REQUEST['profile_id']))
-      $profile_id = (int)$_REQUEST['profile_id'];
+      $profile_id = (int)$_REQUEST['profile_id']; //briskei to profile_id me to opoio exei kanei login o xristis
+
     if (empty($profile_id))
       fn_set_notification('W', __('warning'), __('choose_a_profile'));
     else {
       $auth['profile_id'] = $_SESSION['cart']['profile_id'] = $profile_id; // default checkout profile
+	  
+	  //Stathis Liampas -- briskw to onoma toy epilegmenoy upokastimatos 
+		$profile_name = db_get_field("SELECT s_address FROM ?:user_profiles WHERE profile_id = ?i", $profile_id);
+		$auth['profile_name'] = $_SESSION['cart']['profile_name']=$profile_name;
+	  //Stathis Liampas -- mexri edw
       
       fn_extract_cart_content($_SESSION['cart'], $auth['user_id'], 'C');
-
+      
 	  	//----------------------------------------------------------------------------------------------------------------------
 	  	//----------------- nikosgkil - elegxos gia apenergopoiimenes syntheseis tou pelati pou kanei login --------------------
 	  	//----------------------------------------------------------------------------------------------------------------------
@@ -74,20 +82,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	  	if($flag == 1)
 	  	{
 			$flag = 0;
-		  	fn_set_notification('E', 'Ανενεργά προϊόντα στις συνθέσεις σας', 'Κάποιο από τα προϊόντα που υπάρχει στις συνθέσεις είναι πλέον ανενεργό. Παρακαλούμε, ελέγξτε τις δημιουργημένες συνθέσεις σας και κάντε τις απαραίτητες διορθώσεις.', 'K'); 
+		  	fn_set_notification('E', 'Ξ‘Ξ½ΞµΞ½ΞµΟΞ³Ξ¬ Ο€ΟΞΏΟΟΞ½Ο„Ξ± ΟƒΟ„ΞΉΟ‚ ΟƒΟ…Ξ½ΞΈΞ­ΟƒΞµΞΉΟ‚ ΟƒΞ±Ο‚', 'ΞΞ¬Ο€ΞΏΞΉΞΏ Ξ±Ο€Ο Ο„Ξ± Ο€ΟΞΏΟΟΞ½Ο„Ξ± Ο€ΞΏΟ… Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ ΟƒΟ„ΞΉΟ‚ ΟƒΟ…Ξ½ΞΈΞ­ΟƒΞµΞΉΟ‚ ΞµΞ―Ξ½Ξ±ΞΉ Ο€Ξ»Ξ­ΞΏΞ½ Ξ±Ξ½ΞµΞ½ΞµΟΞ³Ο. Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»ΞΏΟΞΌΞµ, ΞµΞ»Ξ­Ξ³ΞΎΟ„Ξµ Ο„ΞΉΟ‚ Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ·ΞΌΞ­Ξ½ΞµΟ‚ ΟƒΟ…Ξ½ΞΈΞ­ΟƒΞµΞΉΟ‚ ΟƒΞ±Ο‚ ΞΊΞ±ΞΉ ΞΊΞ¬Ξ½Ο„Ξµ Ο„ΞΉΟ‚ Ξ±Ο€Ξ±ΟΞ±Ξ―Ο„Ξ·Ο„ΞµΟ‚ Ξ΄ΞΉΞΏΟΞΈΟΟƒΞµΞΉΟ‚.', 'K'); 
 		  	$redirect_url = '?search_performed=Y&status=D&creation=&dispatch%5Bproducts.manage%5D=&security_hash=3dc28eadebad95b18b8943b63758fe86';
 		  	return array(CONTROLLER_STATUS_REDIRECT, $redirect_url);
 	  	}
 	  	else
 	  	{
 		  	return array(CONTROLLER_STATUS_REDIRECT, 'index.php');
-	  	}	
-		//----------------------------------------------------------------------------------------------------------------------
-		//----------------- nikosgkil - elegxos gia apenergopoiimenes syntheseis tou pelati pou kanei login --------------------
-		//----------------------------------------------------------------------------------------------------------------------
-      
-      //return array(CONTROLLER_STATUS_REDIRECT, 'index.php');
+	  	}
     }
+	
+	//----------------------------------------------------------------------------------------------------------------------
+	//----------------- nikosgkil - elegxos gia apenergopoiimenes syntheseis tou pelati pou kanei login --------------------
+	//----------------------------------------------------------------------------------------------------------------------
     
 	} else if ($mode == 'register') {
         if (fn_image_verification('use_for_register', $_REQUEST) == false) {
@@ -132,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
      
     // $to=('f2151605@mvrht.com'==$_REQUEST['user_data']['email'])?$_REQUEST['user_data']['email']:'company_users_department';
       // Notify administrator about new profile
+	//Liampas Stathis-14/3/18,to parakatw tmima to epanefera dioti den erxotan email gia tin eggrafi neou xristi! 	
       Mailer::sendMail(array(
           'to' => 'company_users_department',
           'from' => 'company_users_department',
@@ -141,6 +149,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           ),
           'tpl' => 'addons/my_users/activate_profile2.tpl'
       ), 'A', Registry::get('settings.Appearance.backend_default_language'));
+	  
+	   Mailer::sendMail(array(
+    	'to' => 'company_users_department',
+        'from' => 'company_users_department',
+		'reply_to' => $_REQUEST['user_data']['email'],
+        'data' => 'Ξ— Ο€Ξ±ΟΞ±Ξ³Ξ³ΞµΞ»Ξ―Ξ± ΞΞΏ. ' . $redirect_url . 'Ξ­Ο‡ΞµΞΉ ΞΊΞ±Ο„Ξ¬ΟƒΟ„Ξ±ΟƒΞ· Ο€Ξ±ΟΞ±Ξ³Ξ³ΞµΞ»Ξ―Ξ±Ο‚: ' . $_REQUEST['user_data'],
+      ), 'A', Registry::get('settings.Appearance.backend_default_language'));
+
     }
     
     if (!$is_valid_user_data) {
@@ -261,7 +277,7 @@ if ($mode == 'choose') {
   
   $profiles = db_get_array("SELECT * FROM ?:user_profiles WHERE user_id = ?i", $auth['user_id']);
   
-//an exei 1 den xreiazetai na epilejei <- imatz 
+  //an exei 1 den xreiazetai na epilejei <- imatz 
   // --> nikosgkil elegxos synthesewn kai redirect <-- nikosgkil
   if (1==count($profiles)) 
   {
@@ -297,7 +313,7 @@ if ($mode == 'choose') {
 	  	if($flag == 1)
 	  	{
 			$flag = 0;
-		  	fn_set_notification('E', 'Ανενεργά προϊόντα στις συνθέσεις σας', 'Κάποιο από τα προϊόντα που υπάρχει στις συνθέσεις είναι πλέον ανενεργό. Παρακαλούμε, ελέγξτε τις δημιουργημένες συνθέσεις σας και κάντε τις απαραίτητες διορθώσεις.', 'K'); 
+		  	fn_set_notification('E', 'Ξ‘Ξ½ΞµΞ½ΞµΟΞ³Ξ¬ Ο€ΟΞΏΟΟΞ½Ο„Ξ± ΟƒΟ„ΞΉΟ‚ ΟƒΟ…Ξ½ΞΈΞ­ΟƒΞµΞΉΟ‚ ΟƒΞ±Ο‚', 'ΞΞ¬Ο€ΞΏΞΉΞΏ Ξ±Ο€Ο Ο„Ξ± Ο€ΟΞΏΟΟΞ½Ο„Ξ± Ο€ΞΏΟ… Ο…Ο€Ξ¬ΟΟ‡ΞµΞΉ ΟƒΟ„ΞΉΟ‚ ΟƒΟ…Ξ½ΞΈΞ­ΟƒΞµΞΉΟ‚ ΞµΞ―Ξ½Ξ±ΞΉ Ο€Ξ»Ξ­ΞΏΞ½ Ξ±Ξ½ΞµΞ½ΞµΟΞ³Ο. Ξ Ξ±ΟΞ±ΞΊΞ±Ξ»ΞΏΟΞΌΞµ, ΞµΞ»Ξ­Ξ³ΞΎΟ„Ξµ Ο„ΞΉΟ‚ Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ·ΞΌΞ­Ξ½ΞµΟ‚ ΟƒΟ…Ξ½ΞΈΞ­ΟƒΞµΞΉΟ‚ ΟƒΞ±Ο‚ ΞΊΞ±ΞΉ ΞΊΞ¬Ξ½Ο„Ξµ Ο„ΞΉΟ‚ Ξ±Ο€Ξ±ΟΞ±Ξ―Ο„Ξ·Ο„ΞµΟ‚ Ξ΄ΞΉΞΏΟΞΈΟΟƒΞµΞΉΟ‚.', 'K'); 
 		  	$redirect_url = '?search_performed=Y&status=D&creation=&dispatch%5Bproducts.manage%5D=&security_hash=3dc28eadebad95b18b8943b63758fe86';
 		  	return array(CONTROLLER_STATUS_REDIRECT, $redirect_url);
 	  	}
@@ -322,6 +338,7 @@ if ($mode == 'choose') {
 		$_SESSION['real_products'] = $real_products;
 	
     //return array(CONTROLLER_STATUS_REDIRECT, "index.php");
+  
   
   foreach ($profiles as &$profile) {
     $phones = fn_my_users_get_user_profile_phones('S',$profile['user_id'],$profile['profile_id']);
@@ -350,6 +367,7 @@ if ($mode == 'choose') {
   
   Tygh::$app['view']->assign('profile_fields',$map);
   Tygh::$app['view']->assign('profiles',$profiles);
+  
   
 } else if ($mode == 'register') {
 

@@ -24,7 +24,7 @@
 <tr>
 <table bgcolor="#67b9ce" cellpadding="0" cellspacing="0" border="0" width="100%" style="padding: 27px 10px 10px 10px;">
             <tr>
-                <td width="70%" align="left" style="padding-bottom: 3px;" valign="middle"><img src="images\logos\1\SuperCourse-Logo_wasw-m8.png" width="200" height="68" border="0" alt="Supercourse ELT Publishing" />
+                <td width="70%" align="left" style="padding-bottom: 3px;" valign="middle"><img src="images/logos/1/SuperCourse-Logo_wasw-m8.png" width="200" height="68" border="0" alt="Supercourse ELT Publishing" />
                 </td>
                 <td width="30%" style="text-align: right;  font: 16px Arial; color: white; text-transform: normal;  margin: 10px 20px 10px 0;">
                 	Στοιχεία λογαριασμού e-Shop.
@@ -45,19 +45,19 @@
                <table cellpadding="0" cellspacing="0" border="0">
                     {if $company_data.company_phone}
                     <tr>
-                    <img style="vertical-align:middle;" src="images\mail_icons\Tel_icon.png" alt="Phone" width="42" height="42">
+                    <img style="vertical-align:middle;" src="images/mail_icons/Tel_icon.png" alt="Phone" width="42" height="42">
                     {$company_data.company_phone}
                     {/if}
                     {if $company_data.company_fax}
-                    <img style="vertical-align:middle;" src="images\mail_icons\Fax_icon.png" alt="Fax" width="42" height="42">
+                    <img style="vertical-align:middle;" src="images/mail_icons/Fax_icon.png" alt="Fax" width="42" height="42">
                     {$company_data.company_fax}
                     {/if}
                     {if $company_data.company_website}
-                    <img style="vertical-align:middle;" src="images\mail_icons\Web_icon.png" alt="Website" width="42" height="42">
+                    <img style="vertical-align:middle;" src="images/mail_icons/Web_icon.png" alt="Website" width="42" height="42">
                     {$company_data.company_website}
                     {/if}
                     {if $company_data.company_orders_department}
-                    <img style="vertical-align:middle;" src="images\mail_icons\Email_icon.png" alt="Email" width="42" height="42">
+                    <img style="vertical-align:middle;" src="images/mail_icons/Email_icon.png" alt="Email" width="42" height="42">
                     <a href="mailto:{$company_data.company_orders_department}">{$company_data.company_orders_department|replace:",":"<br>"|replace:" ":""}</a>
                     </tr>
                     {/if}
