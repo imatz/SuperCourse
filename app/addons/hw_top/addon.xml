@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>hw_top</id>
+    <version>1.1</version>
+    <priority>700</priority>
+    <position>0</position>
+    <status>active</status>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <settings edition_type="ROOT">
+        <sections>
+            <section id="general">
+                <items>
+                    <item id="position">
+                        <type>radiogroup</type>
+                        <default_value>3</default_value>
+                        <variants>
+                            <item id="1"></item>
+                            <item id="2"></item>
+                            <item id="3"></item>
+                            <item id="4"></item>
+                        </variants>
+                    </item>
+                    <item id="margin">
+                        <type>input</type>
+                        <default_value>0px 10px 10px 0px</default_value>
+                    </item>
+                </items>
+            </section>
+        </sections>
+    </settings>    
+    <functions>
+        <item for="install">fn_hw_top_install</item>
+        <item for="uninstall">fn_hw_top_uninstall</item>
+    </functions>  
+</addon>

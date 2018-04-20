@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+    <id>my_states</id>
+    <name>ioannis m.: My States</name>
+    <description>Custom changes regarding States</description>
+    <version>1.0</version>
+    <priority>200</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>en</default_language>
+    <status>active</status>
+	<translations>
+    	<item for="name" lang="el">ioannis m.: Νομοί</item>
+        <item for="description" lang="el">Αλλαγές που αφορούν τη διαχείριση νομών</item>
+    </translations>
+    <language_variables>
+		<item lang="en" id="cmp">CMP</item>	
+		<item lang="el" id="cmp">CMP</item>	
+    </language_variables>
+	<queries>
+		<item for="install">
+			ALTER TABLE `?:states` ADD `cmp` CHAR(2) NULL;
+		</item>
+	</queries>	
+</addon>

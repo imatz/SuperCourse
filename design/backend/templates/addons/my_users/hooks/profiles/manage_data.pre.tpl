@@ -1,0 +1,1 @@
+ <td class="row-status">{$user.user_login}</td>

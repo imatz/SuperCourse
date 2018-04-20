@@ -1,0 +1,1 @@
+{style src="addons/let_it_snow/styles.css"}

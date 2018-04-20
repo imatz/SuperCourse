@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+    <id>my_checkout</id>
+    <name>ioannis m.: My Checkout</name>
+    <description>Custom changes regarding checkout - orders</description>
+    <version>1.0</version>
+    <priority>210</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>en</default_language>
+    <status>active</status>
+	<translations>
+    	<item for="name" lang="el">ioannis m.: Ταμείο</item>
+        <item for="description" lang="el">Αλλαγές που αφορούν το Ταμείο και τις Παραγγελίες</item>
+    </translations>
+	<language_variables>
+		<item lang="en" id="receipt">Retail receipt</item>	
+		<item lang="el" id="receipt">Απόδειξη λιανικής</item>	
+		<item lang="en" id="tim_lian">Select voucher</item>	
+		<item lang="el" id="tim_lian">Επιλογή παραστατικού</item>
+    </language_variables>
+  
+</addon>

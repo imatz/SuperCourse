@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<addon scheme='3.0'>
+	<id>product_packages</id>
+	<version>1.0</version>	
+	<priority>1</priority>
+	<position>0</position>
+	<default_language>en</default_language>
+        <settings edition_type="ROOT,ULT:VENDOR">
+            <sections>
+                <section id="general">
+                    <name>General</name>
+                    <items>
+                        <item id="licensekey">
+                            <name>License Key</name>
+                            <type>input</type>
+                            <tooltip>Get the License Key on the detailed page of your order</tooltip>           
+                        </item>                    
+                    </items>
+                </section>
+            </sections>
+        </settings>
+	<queries>
+			
+		<item for="install">ALTER TABLE `?:products` ADD package char(1) NOT NULL DEFAULT 'N'</item>	
+		<item for="uninstall">ALTER TABLE `?:products` DROP package</item>
+		
+		<item for="install">ALTER TABLE `?:products` ADD price_rules_options char(1) NOT NULL DEFAULT 'N'</item>	
+		<item for="uninstall">ALTER TABLE `?:products` DROP price_rules_options </item>
+                
+                <item for="install">ALTER TABLE `?:products` ADD price_rule char(1) NOT NULL DEFAULT 'S'</item> 
+                <item for="uninstall">ALTER TABLE `?:products` DROP price_rule </item>
+		
+		<item for="install">ALTER TABLE `?:products` ADD package_form char(1) NOT NULL DEFAULT 'N'</item>	
+		<item for="uninstall">ALTER TABLE `?:products` DROP package_form </item>
+		
+		
+		<item for="install">
+		CREATE TABLE IF NOT EXISTS `?:products_packages` (
+                    `p_id` int(11) NOT NULL,
+                    `product_id` int(11) unsigned NOT NULL,
+                    `position` int(11) unsigned NOT NULL,
+                    `amount` int(11) NOT NULL,
+                    `price` decimal(12,2) NOT NULL,
+                    `f_price` decimal(12,2) NOT NULL,
+                    `item_id` int(11) NOT NULL,
+                    `options` mediumtext CHARACTER SET latin1 NOT NULL,
+                    `p_modifier` decimal(12,2) NOT NULL DEFAULT '0.00',
+                    `p_modifier_type` char(20) CHARACTER SET latin1 NOT NULL DEFAULT 'by_fixed',
+                    `multiple` char(1) CHARACTER SET latin1 NOT NULL DEFAULT 'N',
+                    UNIQUE KEY `p_id` (`p_id`,`item_id`)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+		</item>
+		
+		<item for="uninstall">DROP TABLE `?:products_packages` </item>
+                
+                <item for="install">
+                CREATE TABLE IF NOT EXISTS `?:no_product_items` (
+                    `product_id` int(11) NOT NULL,
+                    `name` varchar(255) NOT NULL,
+                    `price` decimal(12,2) NOT NULL,
+                    `amount` int(11) NOT NULL,
+                    `position` int(11) NOT NULL,
+                    KEY `product_id` (`product_id`)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+                </item>
+                
+                <item for="uninstall">DROP TABLE `?:no_product_items` </item>
+		
+	</queries>
+</addon>

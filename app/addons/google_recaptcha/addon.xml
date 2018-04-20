@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<addon scheme='3.0' edition_type="ROOT,ULT:VENDOR">
+	<id>google_recaptcha</id>
+	<version>1.0</version> 
+	<priority>100</priority>
+	<name>Custom: Google Recaptcha</name>
+	<tab_order>prepend</tab_order> 
+	<settings  edition_type="ROOT,ULT:VENDOR">
+		<sections>
+			<section id="general">
+				<items>
+					<item id="key">
+						<name>key</name>
+						<type>input</type>
+						<default_value></default_value>
+					</item>
+					<item id="secretkey">
+						<name>secretkey</name>
+						<type>input</type>
+						<default_value></default_value>
+					</item>
+					<item id="theme">
+						<name>theme</name>
+						<type>selectbox</type>
+						<variants>
+							<item id="light"></item>
+							<item id="dark"></item>
+						</variants>
+						<default_value>light</default_value>
+					</item>
+					<item id="type">
+						<name>type</name>
+						<type>selectbox</type>
+						<variants>
+							<item id="image"></item>
+							<item id="audio"></item>
+						</variants>
+						<default_value>image</default_value>
+					</item>	
+					<item id="licensekey">
+						<name>licensekey</name>
+						<type>input</type>
+						<default_value></default_value>
+					</item>						
+				</items>
+			</section>
+		</sections>
+	</settings>    
+</addon>
+

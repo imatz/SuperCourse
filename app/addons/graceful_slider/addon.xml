@@ -1,0 +1,293 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+	<id>graceful_slider</id>
+	<name>Custom: Graceful slider</name>
+	<description>Allows you to create video and visual slides</description>
+	<version>2.0.1</version>
+	<priority>2801</priority>
+	<position>99</position>
+
+	<default_language>en</default_language>
+	
+	<auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+	<authors>
+		<author>
+			<name>Cart-Power</name>
+			<email>sales@cart-power.com</email>
+			<url>http://cart-power.com</url>
+			<phone>+7-905-349-7665</phone>
+		</author>
+	</authors>
+	
+	<settings edition_type="ROOT">
+		<sections>
+			<section id="general">
+				<name>General</name>
+				<items>
+					
+					<item id="licensekey">
+						<name>License Key</name>
+						<type>input</type>
+						<tooltip>Get the License Key on the detailed page of your order</tooltip>
+					</item>
+					
+					<item id="slide_multilang">
+						<name>Enable multi-language Images/Video/URLs </name>
+						<type>checkbox</type>
+						<default_value>Y</default_value>
+						<translations>
+							<item lang="ru">Включить мультиязычность для рисунков/видео/URL</item>
+						</translations>
+					</item>
+				</items>
+			</section>
+		</sections>
+	</settings>
+	<translations>
+		<item for="name" lang="ru">Cart-Power: Graceful slider</item>
+		<item for="description" lang="ru">Позволяет создавать видео и графические слайды. <![CDATA[ Сдлано в <a target="_blank" href="http://cart-power.com/">Cart-Power</a>]]></item>
+	</translations>
+	<queries>
+		<item>DROP TABLE IF EXISTS ?:slides;</item>
+		<item>DROP TABLE IF EXISTS ?:slide_descriptions;</item>
+		<item>DROP TABLE IF EXISTS ?:slide_videos;</item>
+		<item>DROP TABLE IF EXISTS ?:slide_images;</item>
+		<item>
+			CREATE TABLE `?:slides` (
+				`slide_id` mediumint(8) unsigned NOT NULL auto_increment,
+				`status` char(1) NOT NULL default 'A',
+				`type` char(1) NOT NULL default 'G',
+				`target` char(1) NOT NULL default 'B',
+				`localization` varchar(255) NOT NULL default '',
+				`timestamp` int(11) unsigned NOT NULL default '0',
+				`position` smallint(5) unsigned NOT NULL default '0',
+				PRIMARY KEY  (`slide_id`),
+				KEY `localization` (`localization`),
+				KEY `status` (`status`)
+			) Engine=MyISAM DEFAULT CHARSET UTF8;
+		</item>
+		<item>
+			CREATE TABLE `?:slide_descriptions` (
+				`slide_id` mediumint(8) unsigned NOT NULL default 0,
+				`slide` varchar(255) NOT NULL default '',
+				`url` varchar(255) NOT NULL default '',
+				`title` text NOT NULL,
+				`description` mediumtext NOT NULL,
+				`settings` text NOT NULL,
+				`lang_code` char(2) NOT NULL default '',
+				PRIMARY KEY  (`slide_id`,`lang_code`)
+			) Engine=MyISAM DEFAULT CHARSET UTF8;
+		</item>
+		<item>
+			CREATE TABLE `?:slide_videos` (
+			`slide_id` mediumint(8) unsigned NOT NULL default 0,
+			`video_code` mediumtext NOT NULL,
+			`lang_code` char(2) NOT NULL default '',
+			PRIMARY KEY  (`slide_id`,`lang_code`)
+			) Engine=MyISAM DEFAULT CHARSET UTF8;
+		</item>
+		<item>
+			CREATE TABLE `?:slide_images` (
+			`slide_image_id` mediumint(8) unsigned NOT NULL auto_increment,
+			`slide_id` mediumint(8) unsigned NOT NULL default 0,
+			`lang_code` char(2) NOT NULL default '',
+			PRIMARY KEY  (`slide_image_id`),
+			UNIQUE KEY  `slide` (`slide_id`,`lang_code`)
+			) Engine=MyISAM DEFAULT CHARSET UTF8;
+		</item>
+		<item editions="ULTIMATE">
+			ALTER TABLE `?:slides`
+			ADD COLUMN `company_id` int(11) unsigned NOT NULL DEFAULT '0',
+			ADD KEY `company_id` (`company_id`);
+		</item>
+		<item editions="PROFESSIONAL,MULTIVENDOR,ULTIMATE">REPLACE INTO ?:privileges (privilege, is_default, section_id) VALUES ('view_slides', 'Y', 'design');</item>
+		<item editions="PROFESSIONAL,MULTIVENDOR,ULTIMATE">REPLACE INTO ?:privileges (privilege, is_default, section_id) VALUES ('manage_slides', 'Y', 'design');</item>
+		<item editions="PROFESSIONAL,MULTIVENDOR,ULTIMATE">REPLACE INTO ?:usergroup_privileges (usergroup_id, privilege) VALUES ('4', 'view_slides');</item>
+		<item editions="PROFESSIONAL,MULTIVENDOR,ULTIMATE">REPLACE INTO ?:usergroup_privileges (usergroup_id, privilege) VALUES ('4', 'manage_slides');</item>
+		<item for="uninstall">DROP TABLE IF EXISTS ?:slides;</item>
+		<item for="uninstall">DROP TABLE IF EXISTS ?:slide_descriptions;</item>
+		<item for="uninstall">DROP TABLE IF EXISTS ?:slide_images;</item>
+		<item for="uninstall" editions="PROFESSIONAL,MULTIVENDOR,ULTIMATE">DELETE FROM ?:privileges WHERE privilege = 'view_slides'</item>
+		<item for="uninstall" editions="PROFESSIONAL,MULTIVENDOR,ULTIMATE">DELETE FROM ?:usergroup_privileges WHERE privilege = 'view_slides'</item>
+		<item for="uninstall" editions="PROFESSIONAL,MULTIVENDOR,ULTIMATE">DELETE FROM ?:privileges WHERE privilege = 'manage_slides'</item>
+		<item for="uninstall" editions="PROFESSIONAL,MULTIVENDOR,ULTIMATE">DELETE FROM ?:usergroup_privileges WHERE privilege = 'manage_slides'</item>
+	</queries>
+	<language_variables>
+		<item id="slides.new_slide" lang="en">New slide</item>
+		<item id="slides.new_slide" lang="ru">Новый слайд</item>
+
+		<item id="slides.editing_slide" lang="en">Editing slide</item>
+		<item id="slides.editing_slide" lang="ru">Редактирование слайда</item>
+
+		<item id="add_slide" lang="en">Add slide</item>
+		<item id="add_slide" lang="ru">Добавить слайд</item>
+
+		<item id="slide" lang="en">Slide</item>
+		<item id="slide" lang="ru">Слайд</item>
+
+		<item id="slides" lang="en">Slides</item>
+		<item id="slides" lang="ru">Слайды</item>
+
+		<item id="slides_menu_description" lang="en">Create graphic and video slides that can then be placed on the storefront.</item>
+		<item id="slides_menu_description" lang="ru">Создание графических и видео слайдов для размещения на витрине магазина.</item>
+
+		<item id="slide_code" lang="en">Slide code</item>
+		<item id="slide_code" lang="ru">Код слайда</item>
+
+		<item id="slide_code_for_some_products" lang="en">Slide code for some products</item>
+		<item id="slide_code_for_some_products" lang="ru">Код слайда для некоторого товара</item>
+
+		<item id="manage_slides" lang="en">Manage slides</item>
+		<item id="manage_slides" lang="ru">Слайды</item>
+
+		<item lang="en" id="block_graceful_slider">Slides</item>
+		<item lang="en" id="block_graceful_slider_description">Visual, video slides</item>
+		<item lang="en" id="privileges.view_slides">View slides</item>
+		<item lang="en" id="privileges.manage_slides">Manage slides</item>
+		<item lang="ru" id="block_slides">Слайды</item>
+		<item lang="ru" id="block_slides_description">Графические и видео слайды</item>
+		<item lang="ru" id="privileges.view_slides">Просмотр слайдов</item>
+		<item lang="ru" id="privileges.manage_slides">Управление слайдами</item>
+
+		<item lang="en" id="add_slides">Add slides</item>
+		<item lang="en" id="add_slides_and_close">Add slides and close</item>
+		<item lang="en" id="graphic_slide">Graphic slide</item>
+		<item lang="en" id="text_slide">Text slide</item>
+		<item lang="en" id="slides_statistics">Slides statistics</item>
+		<item lang="en" id="views">Views</item>
+		<item lang="en" id="conversion">Conversion</item>
+
+		<item lang="ru" id="add_slides">Добавить слайды</item>
+		<item lang="ru" id="add_slides_and_close">Добавить слайды и закрыть</item>
+		<item lang="ru" id="graphic_slide">Графический слайд</item>
+		<item lang="ru" id="text_slide">Текстовый слайд</item>
+		<item lang="ru" id="slides_statistics">Статистика слайдов</item>
+		<item lang="ru" id="views">Виды</item>
+		<item lang="ru" id="conversion">Переход</item>
+		
+		<item lang="en" id="video_slide">Video slide</item>
+		<item lang="ru" id="video_slide">Видео слайд</item>
+		
+		<item lang="en" id="video_code">Video code</item>
+		<item lang="ru" id="video_code">Видео код</item>
+		
+		<item lang="en" id="video_preview">Video preview</item>
+		<item lang="ru" id="video_preview">Видео предпросмотр</item>
+		
+		<item lang="en" id="video_slide">Video slide</item>
+		<item lang="ru" id="video_slide">Видео слайд</item>
+		
+		<item lang="en" id="bg_slide">Background</item>
+		<item lang="ru" id="bg_slide">Фон слайда</item>
+		
+		<item lang="en" id="slider">Slider</item>
+		<item lang="ru" id="slider">Слайдер</item>
+		
+		<item lang="en" id="limit_central">Limit central</item>
+		<item lang="ru" id="limit_central">Ограничить по центру</item>
+		
+		<item lang="en" id="limit_central_max_size">Limit central,max size</item>
+		<item lang="ru" id="limit_central_max_size">Максимальная ширини ограничения по центру</item>
+		
+		<item lang="en" id="auto_controls">Auto controls</item>
+		<item lang="ru" id="auto_controls">Управнение авто прокрутки</item>
+		
+		<item lang="en" id="mode">Effect</item>
+		<item lang="ru" id="mode">Эффект перехода</item>
+		
+		<item lang="en" id="fade">Fade</item>
+		<item lang="ru" id="fade">Fade</item>
+		
+		<item lang="en" id="pager">Pager</item>
+		<item lang="ru" id="pager">Pager</item>
+		
+		<item lang="en" id="short">Short</item>
+		<item lang="ru" id="short">Короткий</item>
+		
+		<item lang="en" id="infinite_loop">Infinite loop</item>
+		<item lang="ru" id="infinite_loop">Бесконечная прокрутка</item>
+		
+		<item lang="en" id="skin">Skin</item>
+		<item lang="ru" id="skin">Тема</item>
+		
+		<item lang="en" id="controls">Сontrols</item>
+		<item lang="ru" id="controls">Стрелки</item>
+		
+		<item lang="en" id="slider_bg">Slider background</item>
+		<item lang="ru" id="slider_bg">Фон слайдера</item>
+		
+		<item lang="en" id="image_width_full">Stretch the image</item>
+		<item lang="ru" id="image_width_full">Растягивать изображение</item>
+		
+		<item lang="en" id="mirion_theme">Mirion theme</item>
+		<item lang="ru" id="mirion_theme">Mirion theme</item>
+		
+		<item lang="en" id="graceful_theme">Graceful theme</item>
+		<item lang="ru" id="graceful_theme">Graceful theme</item>
+		
+		<item lang="en" id="ultimo_theme">Ultimo theme</item>
+		<item lang="ru" id="ultimo_theme">Ultimo theme</item>
+		
+		<item lang="en" id="hover_effects">Hover effects</item>
+		<item lang="ru" id="hover_effects">Hover эффекты</item>
+		
+		<item lang="en" id="text_slide_bg_color">Slide background color</item>
+		<item lang="ru" id="text_slide_bg_color">Цвет фона слайда</item>
+		
+		<item lang="en" id="text_slide_text_color">Text color</item>
+		<item lang="ru" id="text_slide_text_color">Цвет текста</item>
+		
+		<item lang="en" id="text_slide_bg_image_opacity">Slide opacity</item>
+		<item lang="ru" id="text_slide_bg_image_opacity">Прозрачность слайда</item>
+		
+		<item lang="en" id="text_slide_bg_color_hover">Hover background</item>
+		<item lang="ru" id="text_slide_bg_color_hover">Фон при наведении</item>
+		
+		<item lang="en" id="text_slide_text_color_hover">Hover text color</item>
+		<item lang="ru" id="text_slide_text_color_hover">Цвет hover текста</item>
+		
+		<item lang="en" id="text_slide_bg_color_opacity_hover">Hover background opacity</item>
+		<item lang="ru" id="text_slide_bg_color_opacity_hover">Прозрачность hover фона</item>
+		
+		<item lang="en" id="effect_lily">Lily</item>
+		<item lang="en" id="effect_mirion">Mirion</item>
+		<item lang="en" id="effect_sadie">Sadie</item>
+		<item lang="en" id="effect_honey">Honey</item>
+		<item lang="en" id="effect_layla">Layla</item>
+		<item lang="en" id="effect_oscar">Oscar</item>
+		<item lang="en" id="effect_marley">Marley</item>
+		<item lang="en" id="effect_ruby">Ruby</item>
+		<item lang="en" id="effect_roxy">Roxy</item>
+		<item lang="en" id="effect_bubba">Bubba</item>
+		<item lang="en" id="effect_romeo">Romeo</item>
+		<item lang="en" id="effect_dexter">Dexter</item>
+		<item lang="en" id="effect_sarah">Sarah</item>
+		<item lang="en" id="effect_chico">Chico</item>
+		<item lang="en" id="effect_milo">Milo</item>
+		
+		<item lang="ru" id="effect_lily">Lily</item>
+		<item lang="ru" id="effect_mirion">Mirion</item>
+		<item lang="ru" id="effect_sadie">Sadie</item>
+		<item lang="ru" id="effect_honey">Honey</item>
+		<item lang="ru" id="effect_layla">Layla</item>
+		<item lang="ru" id="effect_oscar">Oscar</item>
+		<item lang="ru" id="effect_marley">Marley</item>
+		<item lang="ru" id="effect_ruby">Ruby</item>
+		<item lang="ru" id="effect_roxy">Roxy</item>
+		<item lang="ru" id="effect_bubba">Bubba</item>
+		<item lang="ru" id="effect_romeo">Romeo</item>
+		<item lang="ru" id="effect_dexter">Dexter</item>
+		<item lang="ru" id="effect_sarah">Sarah</item>
+		<item lang="ru" id="effect_chico">Chico</item>
+		<item lang="ru" id="effect_milo">Milo</item>
+		
+		<item lang="en" id="fashionSkin">Fashion</item>
+		<item lang="en" id="iSkin">iSkin</item>
+		<item lang="en" id="airSkin">Air</item>
+		<item lang="en" id="gracefulSkin">Graceful</item>
+		<item lang="en" id="lightingSkin">lighting</item>
+
+		<item lang="en" id="licensekey">License Key</item>
+		<item lang="en" id="cp_your_license_is_not_valid">You should enter valid License Key, please contact us (sales@cart-power.com) if you feel any problems</item>
+	</language_variables>
+</addon>

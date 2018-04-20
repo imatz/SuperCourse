@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<addon scheme='2.0' edition_type="ROOT,ULT:VENDOR">
+	<id>fliping_product_icons</id>
+	<version>1.3</version> 
+	<default_language>en</default_language>
+	<name>Custom: Product icon flipping</name>
+	<description>Product icon flipping</description>
+	<priority>97953779</priority>
+	<position>13</position>
+	<status>active</status>
+	<auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+	<authors>
+		<author>
+			<name>Cart-Power</name>
+			<email>sales@cart-power.com</email>
+			<url>http://cart-power.com</url>
+		</author>
+	</authors>
+	<settings>
+		<sections>
+			<section id="general">
+				<name>General</name>
+				<items>
+					<item id="show_effect">
+						<name>Effect</name>
+						<type>selectbox</type>
+						<default_value>horizontal_flip</default_value>
+						<variants>
+							<item id="none">
+								<name>None</name>
+							</item>
+							<item id="horizontal_flip">
+								<name>Horizontal Flip</name>
+							</item>
+							<item id="vertical_flip">
+								<name>Vertical Flip</name>
+							</item>
+						</variants>
+					</item>
+				</items>
+			</section>
+		</sections>
+	</settings>
+	<default_language>en</default_language>
+</addon>
+

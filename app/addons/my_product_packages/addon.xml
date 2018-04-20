@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<addon scheme='3.0'>
+	<id>my_product_packages</id>
+	<name>ioannis m.: My Product Packages</name>
+    <description>Group products into packages</description>
+    <version>1.0</version>
+    <priority>10</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>en</default_language>
+    <status>active</status>
+	<translations>
+    	<item for="name" lang="el">ioannis m.: Πακέτα Προϊόντων</item>
+        <item for="description" lang="el">Ομαδοποίηση Προϊόντων σε πακέτα και πώληση τους ως σύνθεση</item>
+    </translations>  
+	<language_variables>
+		<item lang="en" id="my_packages">My packages</item>	
+		<item lang="el" id="my_packages">Οι συνθέσεις μου</item>
+		<item lang="en" id="new_package">New Set</item>	
+		<item lang="el" id="new_package">Νέα Σύνθεση</item>	
+		<item lang="en" id="retail_price">Retail Price</item>	
+		<item lang="el" id="retail_price">Τιμή Λιανικής</item>	
+		<item lang="en" id="print_code">Print Code</item>	
+		<item lang="el" id="print_code">Εκτύπωση Φύλλου</item>	
+		<item lang="en" id="package_products">Package Products</item>	
+		<item lang="el" id="package_products">Προϊόντα Σύνθεσης</item>	
+		<item lang="en" id="save_package">Save Set</item>	
+		<item lang="el" id="save_package">Αποθήκευση Σύνθεσης</item>
+		<item lang="en" id="text_no_packages">Νο product sets found</item>	
+		<item lang="el" id="text_no_packages">Δεν βρέθηκαν Συνθέσεις</item>	
+		<item lang="en" id="quick_package">Quick Set(Q)</item>	
+		<item lang="el" id="quick_package">Γρήγορη Σύνθεση(Q)</item>
+		<item lang="en" id="standard_package">Standard Set(S)</item>	
+		<item lang="el" id="standard_package">Κανονική Σύνθεση(S)</item>
+		<item lang="en" id="my_package">Set</item>	
+		<item lang="el" id="my_package">Σύνθεση</item>	
+		<item lang="en" id="create_package_code">Create Code</item>	
+		<item lang="el" id="create_package_code">Δημιουργία Κωδικού Σύνθεσης</item>	
+    </language_variables>
+	<settings layout="separate" edition_type="ROOT,ULT:VENDOR">
+		<sections>
+			<section id="general">
+			<name>General</name>	
+				<translations>
+					<item for="name" lang="el">Γενικές</item>
+				</translations>
+				<items>
+					<item id="packages_category">
+						<type>input</type>
+						<name>Category automatically assigned to packages at creation</name>
+						<translations>
+					    	<item for="name" lang="el">Κατηγορία στην οποία ανατίθενται τα πακέτα κατά τη δημιουργία τους</item>
+					    </translations>
+					</item>
+				</items>
+			</section>	
+		</sections>
+	</settings>
+	<queries>	
+		<item for="install">ALTER TABLE `?:products` ADD package char(1) NOT NULL DEFAULT 'N'</item>	
+		<item for="uninstall">ALTER TABLE `?:products` DROP package</item>
+		
+		<item for="install">
+		CREATE TABLE IF NOT EXISTS `?:package_products` (
+                    `package_id` int(11) NOT NULL,
+                    `product_id` int(11) unsigned NOT NULL,
+                    UNIQUE KEY `package_products_UK` (`package_id`,`product_id`)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+		</item>
+		
+		<item for="uninstall">DROP TABLE `?:package_products` </item>
+		
+		<item for="install">
+		CREATE TABLE IF NOT EXISTS `?:package_data` (
+                    `package_id` int(11) unsigned NOT NULL,
+					`user_id` mediumint(8) NOT NULL,
+					`type` char(1) NOT NULL,
+					`b_discount_type` char(1) NULL,
+					`b_discount_value` decimal (10,2) NULL,
+					`c_discount_type` char(1) NULL,
+					`c_discount_value` decimal (10,2) NULL,
+                    PRIMARY KEY `package_data_PK` (`package_id`)
+                ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+		</item>
+		
+		<item for="uninstall">DROP TABLE `?:package_data` </item>
+	</queries>
+</addon>

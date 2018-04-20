@@ -1,0 +1,1 @@
+{include file="buttons/button.tpl" but_text=__("pre_login") but_onclick=$but_onclick but_href=http://www.google.com but_target=$but_target but_role=$but_role}

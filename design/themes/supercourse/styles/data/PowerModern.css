@@ -1,0 +1,27 @@
+.ty-btn__primary {
+	background: #f20202;
+	color: #fff;
+}
+.ty-btn__primary:hover {
+	background: darken(#f20202, 5%);
+	color: #fff;
+}
+.ty-btn__primary.ty-btn__text {
+	color: #f20202;
+}
+.ty-btn__secondary {
+	background: #1f5070;
+	color: #fff;
+}
+.ty-btn__secondary:hover {
+	background: lighten(#1f5070, 10%);
+	color: #fff;
+}
+.ty-btn__tertiary {
+	background: #1f5070;
+	color: @links;
+}
+.ty-btn__tertiary:hover {
+	background: darken(#1f5070, 10%);
+	color: @base;
+}

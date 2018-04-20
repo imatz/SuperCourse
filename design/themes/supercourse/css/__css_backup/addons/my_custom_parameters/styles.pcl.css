@@ -1,0 +1,366 @@
+#content_package_products {
+  width: 750px !important;
+}
+#content_package_products form {
+  max-height: 50%;
+  padding: 0 10px;
+}
+#content_package_products form .ty-sort-container {
+  margin: 0;
+}
+#content_package_products form .ty-pagination__bottom {
+  padding: 0;
+  position: absolute;
+  bottom: 0px;
+}
+#content_package_products form .ty-pagination {
+  padding: 0;
+}
+#content_package_products .object-container {
+  width: 750px;
+}
+#content_package_products .object-container .buttons-container-picker {
+  width: 750px;
+}
+#content_package_products .ty-product-list__image {
+  margin-left: 10px;
+}
+.ty-package-products-search-form .ty-package-products-search-form__buttons-container {
+  clear: both;
+  margin: 30px 0 0 -20px;
+  padding: 15px 10px 15px 20px;
+}
+.ty-package-products-search-form .ty-package-products-search-form-left-block {
+  width: 50%;
+}
+.ty-package-products-search-form .ty-package-products-search-form-left-block input {
+  margin-top: 10px;
+}
+.ty-package-products-search-form .ty-package-products-search-form-right-block {
+  width: 50%;
+}
+.ty-package-products-search-form .ty-section__body {
+  padding: 0;
+}
+.ty-package-products-search-form .ty-section__body form {
+  padding: 0 10px;
+  margin: 0 10px;
+}
+.cm-item.ty-product-list__bulk {
+  margin: 75px 0px 0px 10px;
+}
+.ty-packages th {
+  font-weight: bold;
+}
+.ty-packages .ty-date {
+  display: block;
+  margin-top: 5px;
+}
+.ty-package-products {
+  display: block;
+}
+.my_cart_continue {
+  margin: 0 20px;
+}
+.my_login_prompt {
+  min-width: 640px;
+  min-height: 480px;
+}
+.my_login_prompt .ty-btn {
+  display: block;
+  margin: 10px;
+}
+.my_login_prompt .ty-login-popup  .buttons-container {
+  position: relative !important;
+  padding: 10px;
+}
+.my_login_prompt .ty-login-popup {
+  margin: 20px;
+  padding: 0;
+  position: relative !important;
+}
+.my_login_prompt_buttons {
+  width: 38%;
+  margin: 10px;
+}
+.my_login_prompt_board {
+  margin-top: 20px;
+  max-width: 56%;
+}
+.my_login_prompt_board .ty-logo-container {
+  display: block;
+}
+#login_prompt_text {
+  margin: 20px;
+}
+@media screen and (max-width: 640px) {
+  .my_login_prompt {
+    width: 100%;
+    min-width: 0;
+  }
+  .my_login_prompt .ty-btn {
+    display: inline-block;
+    margin: 2%;
+    min-width: 36%;
+  }
+  .my_login_prompt_buttons,
+  .my_login_prompt_board {
+    width: 95%;
+    max-width: 95%;
+  }
+  .my_login_prompt_buttons .ty-logo-container,
+  .my_login_prompt_board .ty-logo-container {
+    display: none;
+  }
+}
+#shipping_estimation_block .object-container {
+  height: auto !important;
+  padding-bottom: 70px;
+}
+.ty-btn {
+  background: #00aeef;
+}
+.ty-btn__primary {
+  background: #df2828;
+}
+.ty-btn__secondary {
+  background: #0071bc;
+}
+.ty-btn__secondary:hover {
+  background: #0089cf;
+}
+.ty-subcategories__item {
+  text-align: center;
+}
+.ty-subcategories__current {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+.ty-subcategories__current img {
+  height: 160px;
+}
+.ty-subcategories__current span {
+  font-weight: bold;
+}
+.ty-product-list__description {
+  margin: 10px;
+}
+.footer-payment-icons {
+  float: right;
+}
+.footer-payment-icons img {
+  height: 30px;
+  margin: 5px;
+}
+body:before {
+  content: 'Installation of the Theme is not complete! Please install the addon and activate it';
+  display: block;
+  padding: 100px 50px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  background: #f00;
+}
+@media (min-width: 767px) {
+  .ty-cart-content .ty-cart-content__product-elem,
+  .ty-cart-content .ty-cart-content__title {
+    border: 0;
+  }
+  .top-menu {
+    margin-top: 3px;
+  }
+}
+@media (min-width: 768px) and (max-width: 979px) {
+  .top-menu {
+    margin-top: -27px;
+  }
+}
+@media (max-width: 767px) {
+  .top-menu .open-menu-button {
+    position: absolute;
+    top: -72px;
+    right: 15px;
+  }
+  .top-menu .open-menu-button .ty-icon-short-list {
+    padding-right: 0;
+  }
+  .top-menu .open-menu-button span {
+    display: none;
+  }
+}
+.ty-tygh .ty-product-block {
+  padding: 0 0 20px;
+}
+div .ty-breadcrumbs {
+  display: block;
+}
+.our-brands__wrapper .ty-grayscale {
+  -webkit-filter: none;
+  filter: none;
+}
+.ty-tygh .ty-benefits-guarantees.have-bg-class,
+.ty-tygh .have-bg .ty-mainbox-body,
+.ty-tygh .have-bg-class {
+  padding-left: 0;
+  padding-right: 0;
+}
+ul.social-networks li a i {
+  color: #cccccc;
+}
+ul.social-networks li a {
+  background: #666666;
+  border-color: #666666;
+}
+ul.social-networks li a i {
+  color: #fff;
+}
+ul.social-networks li a.icon-social-facebook {
+  background: #3B5998;
+  border-color: #3B5998;
+}
+ul.social-networks li a.icon-social-twitter {
+  background: #55ACEE;
+  border-color: #55ACEE;
+}
+ul.social-networks li a.icon-social-gplus {
+  background: #DD4B39;
+  border-color: #DD4B39;
+}
+ul.social-networks li a.icon-social-instagram {
+  background: #517fa4;
+  border-color: #517fa4;
+}
+ul.social-networks li a.icon-social-dribbble {
+  background: #ea4c89;
+  border-color: #ea4c89;
+}
+ul.social-networks li a.icon-social-play {
+  background: #c4302b;
+  border-color: #c4302b;
+}
+ul.social-networks li a.icon-social-vimeo {
+  background: #44bbff;
+  border-color: #44bbff;
+}
+ul.social-networks li a.icon-social-pinterest {
+  background: #c8232c;
+  border-color: #c8232c;
+}
+ul.social-networks li a.icon-social-linkedin {
+  background: #0e76a8;
+  border-color: #0e76a8;
+}
+ul.social-networks li a.icon-social-tumblr {
+  background: #35465c;
+  border-color: #35465c;
+}
+ul.social-networks li a:hover.icon-social-facebook {
+  background: none;
+  border-color: #3B5998;
+}
+ul.social-networks li a:hover.icon-social-facebook i {
+  color: #3B5998;
+}
+ul.social-networks li a:hover.icon-social-twitter {
+  background: none;
+  border-color: #55ACEE;
+}
+ul.social-networks li a:hover.icon-social-twitter i {
+  color: #55ACEE;
+}
+ul.social-networks li a:hover.icon-social-gplus {
+  background: none;
+  border-color: #DD4B39;
+}
+ul.social-networks li a:hover.icon-social-gplus i {
+  color: #DD4B39;
+}
+ul.social-networks li a:hover.icon-social-instagram {
+  background: none;
+  border-color: #517fa4;
+}
+ul.social-networks li a:hover.icon-social-instagram i {
+  color: #517fa4;
+}
+ul.social-networks li a:hover.icon-social-dribbble {
+  background: none;
+  border-color: #ea4c89;
+}
+ul.social-networks li a:hover.icon-social-dribbble i {
+  color: #ea4c89;
+}
+ul.social-networks li a:hover.icon-social-play {
+  background: none;
+  border-color: #c4302b;
+}
+ul.social-networks li a:hover.icon-social-play i {
+  color: #c4302b;
+}
+ul.social-networks li a:hover.icon-social-vimeo {
+  background: none;
+  border-color: #44bbff;
+}
+ul.social-networks li a:hover.icon-social-vimeo i {
+  color: #44bbff;
+}
+ul.social-networks li a:hover.icon-social-pinterest {
+  background: none;
+  border-color: #c8232c;
+}
+ul.social-networks li a:hover.icon-social-pinterest i {
+  color: #c8232c;
+}
+ul.social-networks li a:hover.icon-social-linkedin {
+  background: none;
+  border-color: #0e76a8;
+}
+ul.social-networks li a:hover.icon-social-linkedin i {
+  color: #0e76a8;
+}
+ul.social-networks li a:hover.icon-social-tumblr {
+  background: none;
+  border-color: #35465c;
+}
+ul.social-networks li a:hover.icon-social-tumblr i {
+  color: #35465c;
+}
+.ty-product-list.blog-item {
+  padding: 10px 20px 20px;
+}
+.ty-mainbox-title {
+  padding-left: 0;
+  padding-right: 0;
+}
+.ty-sidebox,
+.ty-sort-dropdown__wrapper {
+  padding-left: 0;
+}
+.ty-step__container-active .ty-step__title-left,
+.ty-multi-checkout__active .ty-multi-checkout__number {
+  background: #000;
+}
+.ty-multi-checkout__active .ty-multi-checkout__number:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -5px;
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 24px solid transparent;
+  border-left: 5px solid #000;
+  border-bottom: 24px solid transparent;
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(//fonts.gstatic.com/s/roboto/v15/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Condensed'), local('RobotoCondensed-Regular'), url(//fonts.gstatic.com/s/robotocondensed/v13/Zd2E9abXLFGSr9G3YK2MsFzqCfRpIA3W6ypxnPISCPA.woff) format('woff');
+}

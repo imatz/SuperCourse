@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<addon scheme="3.0" edition_type="ROOT,ULT:VENDOR">
+    <id>cp_power_popup</id>
+    <version>1.0</version>
+    <default_language>en</default_language>
+    <priority>100</priority>
+    <status>disabled</status>
+    <authors>
+        <author>
+            <name>Cart-Power</name>
+            <email>sales@cart-power.com</email>
+            <url>http://cart-power.com</url>
+        </author>
+    </authors>
+	<settings edition_type="ROOT,ULT:VENDOR">
+        <sections>
+            <section id="general">
+                <items>
+                    <item id="licensekey">
+                        <type>input</type>
+                        <default_value></default_value>
+                    </item>
+                    <item id="use_calendar">
+                        <type>checkbox</type>
+                        <default_value>N</default_value>
+                    </item>
+                </items>
+            </section>
+        </sections>
+    </settings>
+	<queries>
+		<item for="install">
+			CREATE TABLE IF NOT EXISTS `?:cp_popups` (
+			`popup_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+			`company_id` int(11) NOT NULL,
+			`content_type` char(1) CHARACTER SET utf8 NOT NULL DEFAULT 'T',
+			`width` int(11) NOT NULL,
+			`height` int(11) NOT NULL,
+			`auto_size` char(1) CHARACTER SET utf8 NOT NULL DEFAULT 'Y',
+			`status` char(1) CHARACTER SET utf8 NOT NULL DEFAULT 'A',
+			`priority` int(11) NOT NULL,
+			`not_closable` char(1) CHARACTER SET utf8 NOT NULL DEFAULT 'N',
+			`delay` int(11) NOT NULL,
+			`ttl` int(11) NOT NULL,
+			`stop_other` char(1) CHARACTER SET utf8 NOT NULL DEFAULT 'N',
+			`localization` varchar(255) CHARACTER SET utf8 NOT NULL,
+			`section` char(1) CHARACTER SET utf8 NOT NULL,
+			`type` char(1) CHARACTER SET utf8 NOT NULL,
+			`dispatch` text CHARACTER SET utf8 NOT NULL,
+			`page_id` int(11) NOT NULL,
+            `product_id` int(11) NOT NULL,
+			`from_date` int(11) unsigned NOT NULL DEFAULT '0',
+			`to_date` int(11) unsigned NOT NULL DEFAULT '0',
+			`age_limit` int(11) NOT NULL,
+            `redirect_url` TEXT CHARACTER SET utf8 NOT NULL,
+            `usergroup_ids` varchar(255) CHARACTER SET utf8 NOT NULL,
+			PRIMARY KEY (`popup_id`)
+			) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+		</item>
+		<item for="uninstall">DROP TABLE `?:cp_popups` </item>
+		<item for="install">
+			CREATE TABLE IF NOT EXISTS `?:cp_popup_descriptions` (
+			`popup_id` int(11) NOT NULL,
+			`name` varchar(255) CHARACTER SET utf8 NOT NULL,
+			`content` text CHARACTER SET utf8 NOT NULL,
+			`lang_code` char(2) CHARACTER SET utf8 NOT NULL,
+			KEY `popup_id` (`popup_id`,`lang_code`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+		</item>
+		<item for="uninstall">DROP TABLE `?:cp_popup_descriptions` </item>
+		<item for="install">
+			CREATE TABLE IF NOT EXISTS `?:cp_popup_links` (
+			`popup_id` int(11) NOT NULL,
+			`link_object_id` int(11) NOT NULL,
+			`link_type` char(1) CHARACTER SET utf8 NOT NULL,
+			UNIQUE KEY `popup_id_2` (`popup_id`,`link_object_id`,`link_type`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+		</item>
+		<item for="uninstall">DROP TABLE `?:cp_popup_links` </item>
+	</queries>
+</addon>

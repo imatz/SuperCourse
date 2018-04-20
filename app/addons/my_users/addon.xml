@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+    <id>my_users</id>
+    <name>ioannis m.: My Users</name>
+    <description>Custom changes regarding Users</description>
+    <version>1.0</version>
+    <priority>200</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>en</default_language>
+    <status>active</status>
+	<translations>
+    	<item for="name" lang="el">ioannis m.: Χρήστες</item>
+        <item for="description" lang="el">Αλλαγές που αφορούν τη διαχείριση χρηστών</item>
+    </translations>
+    <language_variables>
+		<item lang="en" id="text_unregistered_user_not_found">No match</item>	
+		<item lang="el" id="text_unregistered_user_not_found">Δεν έγινε ταύτιση χρήστη. Παρακαλούμε ελέγξτε τα στοιχεία που εισάγετε. Για βοήθεια επικοινωνήστε με την εξυπηρέτηση πελατών.</item>	
+		<item lang="en" id="text_registered_and_waiting">Users Department is proccessing your request. You will receive an email notification once your account is activated.</item>	
+		<item lang="el" id="text_registered_and_waiting">Το αίτημα σας για ενεργοποίηση του λογαριασμού έχει ήδη λάβει χώρα. Θα ειδοποιηθείτε το συντομότερο για την ενεργοιποίηση του λογαριασμού σας μέσω email.</item>	
+		<item lang="en" id="error_validator_phone">Enter a correct phone number</item>	
+		<item lang="el" id="error_validator_phone">Το τηλέφωνο επικοινωνίας δεν είναι ορθό.</item>	
+    </language_variables>
+	<functions>
+		<item for="install">fn_my_users_install</item>
+	</functions>
+	<settings layout="separate" edition_type="ROOT,ULT:VENDOR">
+		<sections>
+			<section id="profile_field_ids">
+				<name>Profile field ids</name>	
+				<translations>
+					<item for="name" lang="el">Ids πεδίων προφίλ</item>
+				</translations>
+				<items>
+					<item id="account_type">
+						<type>input</type>
+						<name>account type</name>
+						<translations>
+					    	<item for="name" lang="el">Κατηγορία Πελάτη</item>
+					    </translations>
+					</item>
+					<item id="vat_class">
+						<type>input</type>
+						<name>vat class</name>
+						<translations>
+					    	<item for="name" lang="el">Κατηγορία ΦΠΑ</item>
+					    </translations>
+					</item>
+					<item id="tim_lian">
+						<type>input</type>
+						<name>Timologio - Lianikh</name>
+						<translations>
+					    	<item for="name" lang="el">Τιμολόγιο - Λιανική</item>
+					    </translations>
+					</item>
+					<item id="cmp">
+						<type>input</type>
+						<name>CMP</name>
+						<translations>
+					    	<item for="name" lang="el">CMP</item>
+					    </translations>
+					</item>
+					<item id="afm">
+						<type>input</type>
+						<name>AFM</name>
+						<translations>
+					    	<item for="name" lang="el">ΑΦΜ</item>
+					    </translations>
+					</item>
+					<item id="profession">
+						<type>input</type>
+						<name>profession</name>
+						<translations>
+					    	<item for="name" lang="el">Επάγγελμα</item>
+					    </translations>
+					</item>
+					<item id="s_phones">
+						<type>input</type>
+						<name>s_phones</name>
+						<translations>
+					    	<item for="name" lang="el">Τηλέφωνα επικοινωνίας (shipping)</item>
+					    </translations>
+					</item>
+					<item id="b_phones">
+						<type>input</type>
+						<name>b_phones</name>
+						<translations>
+					    	<item for="name" lang="el">Τηλέφωνα επικοινωνίας (billing)</item>
+					    </translations>
+					</item>
+					<item id="s_delivery_notes">
+						<type>input</type>
+						<name>s delivery notes</name>
+						<translations>
+					    	<item for="name" lang="el">Παρατηρήσεις Παράδοσης (shipping)</item>
+					    </translations>
+					</item>
+					<item id="b_delivery_notes">
+						<type>input</type>
+						<name>b delivery notes</name>
+						<translations>
+					    	<item for="name" lang="el">Παρατηρήσεις Παράδοσης (billing)</item>
+					    </translations>
+					</item>
+				</items>
+			</section>	
+		</sections>
+	</settings>
+	<queries>
+		<item for="install">
+			CREATE TABLE IF NOT EXISTS `?:user_profile_phones` (
+			  `user_id` int(11) NOT NULL,
+			  `profile_id` int(11) NULL,
+			  `phone_id` int(11) NOT NULL,
+			  `phone` varchar(32) NOT NULL,
+			  `section` char(1) NOT NULL,
+			  UNIQUE KEY `user_profile_phones_UK` (`user_id`,`profile_id`,`phone_id`) USING BTREE
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;	
+		</item>
+		<!-- 
+		<item for="uninstall">ALTER TABLE `?:users` DROP `account_type`;</item>	
+		<item for="uninstall">DROP TABLE IF EXISTS ?:user_profile_phones;</item>
+		-->
+	</queries>	
+</addon>

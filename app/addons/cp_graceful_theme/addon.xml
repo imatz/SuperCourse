@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+	<id>cp_graceful_theme</id>
+	<name>Custom: Graceful theme</name>
+	<description>An important part of the theme</description>
+	<version>3.0</version>
+	<priority>2100</priority>
+	<position>130</position>
+	<default_language>en</default_language>
+	<auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+	<authors>
+		<author>
+			<name>Cart-Power</name>
+			<email>sales@cart-power.com</email>
+			<url>http://cart-power.com</url>
+			<phone>+7-905-349-7665</phone>
+		</author>
+	</authors>
+	
+	<settings edition_type="ROOT,ULT:VENDOR">
+		<sections>
+			<section id="general">
+				<name>General</name>
+				<items>
+					<item id="licensekey">
+						<name>License Key</name>
+						<type>input</type>
+						<tooltip>Get the License Key on the detailed page of your order</tooltip>
+					</item>
+				</items>
+			</section>
+		</sections>
+	</settings>
+	
+	<language_variables>
+		<item lang="en" id="licensekey">License Key</item>		
+		<item lang="en" id="my_cart">My cart</item>
+		<item lang="en" id="subscribe_ubder_text">Win a coupon of 20% by subscribing to our newsletter, it's easy just enter your e-mail below:</item>
+		<item lang="en" id="short_quantity">Q:</item>
+		<item lang="en" id="color_star_color">Star color</item>
+		<item lang="en" id="color_star_empty_color">Star empty color</item>
+		<item lang="en" id="have_bg">Background box</item>
+		<item lang="en" id="mainbox_general_bg">Mainbox general bg</item>
+		<item lang="en" id="mainbox_simple_bg">Mainbox simple bg</item>
+		<item lang="en" id="copyright_cart_power">Cart-Power. Professional CS-Cart development.</item>
+		<item lang="en" id="cp_your_license_is_not_valid">You should enter valid License Key, please contact us (sales@cart-power.com) if you feel any problems</item>
+	</language_variables>
+</addon>

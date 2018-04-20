@@ -1,0 +1,1 @@
+{script src="js/addons/let_it_snow/fallingsnow_v6.js"}

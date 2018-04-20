@@ -1,0 +1,1 @@
+{$company_data.company_name nofilter}: {__("disabled_packages_subject")}

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<addon scheme="3.0">
+    <id>erp_sync</id>
+    <name>ioannis m.: ERP Syncronization</name>
+    <description>Provides sync between shop and ERP bridge </description>
+    <version>1.0</version>
+    <priority>200</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>en</default_language>
+    <status>active</status>
+	<translations>
+    	<item for="name" lang="el">ioannis m.: Συγχρονισμός Καταστήματος</item>
+        <item for="description" lang="el">Συγχρονισμός με γέφυρα - ERP καταστήματος</item>
+    </translations>
+    <settings layout="separate" edition_type="ROOT,ULT:VENDOR">
+		<sections>
+			<section id="notifications">
+			<name>Notifications</name>	
+				<translations>
+					<item for="name" lang="el">Ειδοποιήσεις</item>
+				</translations>
+				<items>
+					<item id="error_email">
+						<type>textarea</type>
+						<name>On error notify(email)</name>
+						<tooltip>Enter multiple addresses delimited with ";"</tooltip>
+						<translations>
+					    	<item for="tooltip" lang="el">Εισάγετε πολλαπλές διευθύνσεις χωρισμένες με ";"</item>
+					    	<item for="name" lang="el">email για ενημέρωση σε περίπτωση σφάλματος</item>
+					    </translations>
+					</item>
+				</items>
+			</section>	
+			<section id="dir_paths">
+				<name>Folder Paths</name>	
+				<translations>
+					<item for="name" lang="el">Φάκελοι Γέφυρας</item>
+				</translations>
+				<items>
+					<item id="root">
+						<type>input</type>
+						<name>bridge root</name>
+						<tooltip>Relative to site root (DIR_ROOT)</tooltip>
+						<translations>
+					    	<item for="tooltip" lang="el">Σε σχέση με το ριζικό του site (DIR_ROOT)</item>
+					    	<item for="name" lang="el">Ριζικός Γέφυρας</item>
+					    </translations>
+					</item>
+					<item id="product_images">
+						<type>input</type>
+						<name>product images</name>
+						<tooltip>Relative to bridge root</tooltip>
+						<translations>
+					    	<item for="tooltip" lang="el">Σε σχέση με το ριζικό Γέφυρας</item>
+					    	<item for="name" lang="el">Εικόνες Προϊόντων</item>
+					    </translations>
+					</item>
+					<item id="category_images">
+						<type>input</type>
+						<name>category images</name>
+						<tooltip>Relative to bridge root</tooltip>
+						<translations>
+					    	<item for="tooltip" lang="el">Σε σχέση με το ριζικό Γέφυρας</item>
+					    	<item for="name" lang="el">Εικόνες Κατηγοριών</item>
+					    </translations>
+					</item>
+				</items>
+			</section>	
+		</sections>
+	</settings>
+</addon>

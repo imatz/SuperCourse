@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+    <id>ecl_popup_wrapper</id>
+    <status>active</status>
+    <name>[eCom Labs] Pop-up Wrapper</name>
+    <description>Shows blocks with any content in the pop-up window</description>
+    <version>1.2</version>
+    <priority>4294967294</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>en</default_language>
+    <translations>
+    </translations>
+    <language_variables>
+        <item lang="en" id="popup_window">Pop-up Window</item>
+    </language_variables>
+    <authors>
+        <author>
+            <name>eCom Labs</name>
+            <email>contact@ecom-labs.com</email>
+            <url>https://www.ecom-labs.com</url>
+            <phone>+7 963 234 30 03</phone>
+        </author>
+    </authors>
+    <translations>
+        <item for="description" lang="ru">Позволяет показывать содержимое любого блока во всплывающем окне</item>
+    </translations>
+</addon>

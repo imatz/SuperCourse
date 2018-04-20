@@ -1,0 +1,1 @@
+{style src="addons/hw_popup_info/styles.less"}

@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+	<id>i_custom_hooks</id>
+	<name>Ioannis M.: Custom hooks manager</name>
+	<description>Manages the custom hooks in core files</description>
+	<version>1.0</version>
+	<priority>110000</priority>
+	<status>active</status>
+	<default_language>en</default_language>	
+	<auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+	<authors>
+        <author>
+            <name>Ioannis Matziaris</name>
+            <email>imatzgr@gmail.com</email>
+            <url>http://imatz.elance.com</url>
+            <phone>+306945559637</phone>
+        </author>
+    </authors>
+     <translations>
+    	<item for="name" lang="el">Ιωάννης Μ.: Διαχείριση προσαρμοσμένων hooks</item>
+        <item for="description" lang="el">Διαχείριση των προσαρμοσμένων hooks σε αρχεία του πυρήν του CsCart</item>
+    </translations>
+	<language_variables>
+		<item lang="en" id="i_custom_hooks">My Custom Hooks</item>
+		<item lang="en" id="custom_hooks">Custom Hooks</item>
+		<item lang="en" id="i_custom_hooks_menu_title">Custom Hooks</item>
+		<item lang="en" id="open_hook_position">Open Hook Position</item>
+		<item lang="en" id="open_occurrence">Open Occurrence</item>
+		<item lang="en" id="open_hook_order">Open Hook Order</item>
+		<item lang="en" id="above">Above Position</item>
+		<item lang="en" id="below">Below Position</item>
+		<item lang="en" id="open_hook">Hook Opening</item>
+		<item lang="en" id="close_hook_position">Close Hook Position</item>
+		<item lang="en" id="close_occurrence">Close Occurrence</item>
+		<item lang="en" id="close_hook_order">Close Hook Order</item>
+		<item lang="en" id="close_hook">Hook Closing</item>
+		<item lang="en" id="failed">Failed</item>
+		<item lang="en" id="add_custom_hook">Add Custom Hook</item>
+		<item lang="en" id="new_custom_hook">New Custom Hook</item>
+		<item lang="en" id="open_position">Open Position</item>
+		<item lang="en" id="close_position">Close Position</item>
+		<item lang="en" id="delete_custom_hook">Delete Custom Hook</item>
+		<item lang="en" id="custom_hook_deletion_side_effects">This will delete the Custom Hook but first will install it</item>
+		<item lang="en" id="text_hook_has_been_deleted">The Custom Hook has been deleted</item>
+		<item lang="en" id="text_hook_has_been_uninstalled_deleted">The Custom Hook has been uninstalled and deleted</item>
+		<item lang="en" id="check_installation">Check Installation</item>
+		<item lang="en" id="custom_hooks_installations_warning">This will install the selected Custom Hooks. Are you sure you want to proceed?</item>
+		<item lang="en" id="install_selected">Install selected</item>
+		<item lang="en" id="uninstall_selected">Uninstall selected</item>
+		<item lang="en" id="custom_hooks_uninstallations_warning">This will uninstall the selected Custom Hooks. Are you sure you want to proceed?</item>
+		<item lang="en" id="check_installation_selected">Check Installation for selected</item>
+		<item lang="en" id="theme_vars_in_file_name_notification"><![CDATA[<b>[theme_name]</b>: use this instead of the theme name]]></item>
+		<item lang="en" id="text_successful_hook_install">The hook has been installed successfully</item>
+		<item lang="en" id="text_error_hook_install">There was an error in installing custom hook. Check the provided details and try again</item>
+		<item lang="en" id="selected_install_hooks_result_notification"><![CDATA[Successfully installs: [successful_installs]<br />Failed installs: [faild_installs]<br />Total: [total_installs]<br />Check the statuses of the hooks for more details]]></item>
+		<item lang="en" id="text_successful_hook_uninstall">The hook has been uninstalled successfully</item>
+		<item lang="en" id="text_error_hook_uninstall">There was an error in uninstalling custom hook. Check the file and try again</item>
+		<item lang="en" id="text_custom_hook_is_installed">There was an error in uninstalling custom hook. Check the file and try again</item>
+		<item lang="en" id="text_custom_hook_is_installed">The custom hook is installed</item>
+		<item lang="en" id="text_custom_hook_is_not_installed">The custom hook isn't installed</item>
+		<item lang="en" id="editing_custom_hook">Editing Custom Hook</item>
+		<item lang="en" id="selected_uninstall_hooks_result_notification"><![CDATA[Successfully uninstalls: [successful_uninstalls]<br />Failed uninstalls: [faild_uninstalls]<br />Total: [total_uninstalls]<br />Check the statuses of the hooks for more details]]></item>
+		<item lang="en" id="text_hook_already_uninstalled">Hook already uninstalled</item>
+		<item lang="en" id="text_hook_hasnot_been_deleted_because_of_unsuccessful_uninstall">The hook has not been deleted because of unsuccessful uninstall. Check the provided details and the file, try again.</item>
+		<item lang="en" id="text_hook_hasnot_been_deleted">The Custom Hook hasn't been deleted</item>
+		<item lang="en" id="selected_delete_hooks_result_notification"><![CDATA[Successfully deletes/uninstalls: [successful_deletes_uninstalls]<br />Successfully deletes: [successful_deletes]<br />Failed uninstalls: [faild_uninstalls]<br />Failed deletes: [faild_delete]<br />Total: [total_deletes]<br />Check the statuses of the hooks for more details]]></item>
+		<item lang="en" id="selected_is_installed_hooks_result_notification"><![CDATA[Installed: [installed_hooks]<br />Not installed: [not_installed_hooks]<br />Total: [total_hooks]<br />Check the statuses of the hooks for more details]]></item>
+		<item lang="en" id="text_error_file_does_not_exist">The file doesn't exist</item>
+		<item lang="en" id="text_error_open_hook_position_not_detected_or_empty">Open hook position not detected in the file or is empty</item>
+		<item lang="en" id="text_error_close_hook_position_not_detected">Close hook position not detected in the file</item>
+	</language_variables>		
+	<queries>
+       <item>DROP TABLE IF EXISTS ?:i_custom_hooks;</item>
+       <item>
+			CREATE TABLE `?:i_custom_hooks` (
+				`custom_hook_id` INT( 11 ) UNSIGNED NOT NULL AUTO_INCREMENT,
+				`file` VARCHAR( 255 ) NULL ,
+				`comments` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+				`open_hook_position` text,
+				`open_occurrence` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '1',
+				`open_hook_order` CHAR( 1 ) NULL DEFAULT  'A',
+				`open_hook` text ,
+				`close_hook_position` text ,
+				`close_occurrence` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '1',
+				`close_hook_order` CHAR( 1 ) NULL DEFAULT  'B',
+				`close_hook` text ,
+				`timestamp` INT( 11 ) unsigned NOT NULL default '0',
+				`installed` CHAR( 1 ) NULL DEFAULT  'N',
+				PRIMARY KEY  (`custom_hook_id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;			
+		</item>
+		<item for="uninstall">DROP TABLE IF EXISTS ?:i_custom_hooks;</item>
+    </queries> 
+</addon>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+    <id>my_custom_parameters</id>
+    <name>ioannis m.: My Custom Parameters</name>
+    <description>Custom parameters regarding shop's operation syncronized by erp</description>
+    <version>1.0</version>
+    <priority>215</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>en</default_language>
+    <status>active</status>
+	<translations>
+    	<item for="name" lang="el">ioannis m.: Ειδικές Παράμετροι</item>
+        <item for="description" lang="el">Ειδικές Ρυθμίσεις που αφορούν τη λειτουργία του καταστήματος και συγχρονίζονται με το erp</item>
+    </translations>
+</addon>

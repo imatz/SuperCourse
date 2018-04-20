@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<addon scheme='3.0'>
+	<id>my_products_list</id>
+	<name>ioannis m.: My Products List</name>
+    <description>Export available products - Import to cart</description>
+    <version>1.0</version>
+    <priority>11</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>en</default_language>
+    <status>active</status>
+	<translations>
+    	<item for="name" lang="el">ioannis m.: Λίστα Προϊόντων</item>
+        <item for="description" lang="el">Εξαγωγή Διαθέσιμων Προϊόντων σε csv/xls - Προσθήκη στο καλάθι από αρχείο</item>
+    </translations>  
+	<language_variables>
+		<item lang="en" id="products_list">Products List</item>	
+		<item lang="el" id="products_list">Λίστα Προϊόντων</item>
+		<item lang="en" id="download_csv">Download csv</item>	
+		<item lang="el" id="download_csv">Λήψη csv</item>
+		<item lang="en" id="download_xls">Download xls</item>	
+		<item lang="el" id="download_xls">Λήψη xls</item>
+		<item lang="en" id="download_product_list">Download product list</item>	
+		<item lang="el" id="download_product_list">Λήψη λίστας προϊόντων</item>
+		<item lang="en" id="text_download_product_list"><p>You can download all the products available, in .csv or .xls format by using the following links.</p><p>The downloaded file can be used to add the desired products to cart through the following form.</p></item>	
+		<item lang="el" id="text_download_product_list"><p>Μπορείτε να πραγματοποιήσετε λήψη όλων των διαθέσιμων προϊόντων σε μορφή csv ή xls μέσω των παρακάτω συνδέσμων.</p><p>Μετά τη λήψη, μπορείτε να ενημερώσετε το αρχείο ώστε να το χρησιμοποιήσετε στην ακόλουθη φόρμα.</p></item>
+		
+		<item lang="en" id="upload_product_list">Upload product list</item>	
+		<item lang="el" id="upload_product_list">Μεταφόρτωση λίστας αγοράς</item>
+		<item lang="en" id="text_upload_product_list"><p>Update the product quantities in the downloaded list.</p><p>Upload the updated file by using the 'upload file' link.</p><p>Click on the 'add to cart' button.</p></item>	
+		<item lang="el" id="text_upload_product_list"><p>Ενημερώστε την ποσότητα ανά προϊόν στο αρχείο που κατεβάσατε. Αν δεν επιθυμείτε να προσθέσετε στο καλάθι σας ορισμένα προϊόντα, μπορείτε να τα διαγράψετε, ή να αφήσετε την ποσότητα κενή.</p><p>Επιλέξτε το αρχείο το αρχείο μέσω του συνδέσμου 'Ανέβασμα αρχείου'.</p></p>Κάντε κλικ στο κουμπί 'προσθήκη στο καλάθι'.</p></item>
+    </language_variables>
+	
+</addon>

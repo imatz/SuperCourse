@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<addon scheme='2.0' edition_type="ROOT,ULT:VENDOR">
+	<id>powerfull_owl</id>
+	<version>1.1</version>
+	<default_language>en</default_language>
+	<name>Custom: Extended Banner Slider</name>
+	<description>This add-on will make your banners-carousel fantastic!</description>
+	<priority>9795313775</priority>
+	<position>13</position>
+
+	<auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+	<authors>
+		<author>
+			<name>Cart-Power</name>
+			<email>sales@cart-power.com</email>
+			<url>http://cart-power.com</url>
+			<phone>+7-905-349-7665</phone>
+		</author>
+	</authors>
+
+	<settings edition_type="ROOT,ULT:VENDOR">
+		<sections>
+			<section id="general">
+				<name>General</name>
+				<items>
+					<item id="licensekey">
+						<name>License Key</name>
+						<type>input</type>
+						<tooltip>Get the License Key on the detailed page of your order</tooltip>
+					</item>
+				</items>
+			</section>
+		</sections>
+	</settings>
+
+	<default_language>en</default_language>
+	<language_variables>
+		<item lang="en" id="skin">Skin</item>
+		<item lang="en" id="transitionstyle">Transitionstyle</item>
+		<item lang="en" id="pager">Pagination</item>
+		<item lang="en" id="progress_bar">Progress bar</item>
+		<item lang="en" id="stop_on_hover">Stop on hover</item>
+		<item lang="en" id="top">Top</item>
+		<item lang="en" id="bottom">Bottom</item>
+		
+		<item lang="en" id="fade">fade</item>
+		<item lang="en" id="backslide">backSlide</item>
+		<item lang="en" id="godown">goDown</item>
+		<item lang="en" id="scaleup">scaleUp</item>
+		
+		<item lang="en" id="fashionSkin">Fashion</item>		
+		<item lang="en" id="iSkin">iSkin</item>
+		<item lang="en" id="airSkin">Air</item>
+		<item lang="en" id="gracefulSkin">Graceful</item>
+		<item lang="en" id="lightingSkin">lighting</item>
+		
+		<item lang="en" id="fallDown">fallDown</item>
+		<item lang="en" id="fallRotate">backSlide</item>
+		<item lang="en" id="scaleRotate">scaleRotate</item>
+		<item lang="en" id="3dflip">3dflip</item>
+		<item lang="en" id="scaleIn">scaleIn</item>
+		<item lang="en" id="flipCenter">flipCenter</item>
+		
+		<item lang="en" id="licensekey">License Key</item>
+		<item lang="en" id="cp_your_license_is_not_valid">You should enter valid License Key, please contact us (sales@cart-power.com) if you feel any problems</item>
+	</language_variables>
+</addon>
+

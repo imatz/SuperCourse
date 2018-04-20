@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+    <id>my_taxes</id>
+    <name>ioannis m.: My Taxes</name>
+    <description>Custom changes regarding VAT</description>
+    <version>1.0</version>
+    <priority>210</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>en</default_language>
+    <status>active</status>
+	<translations>
+    	<item for="name" lang="el">ioannis m.: ΦΠΑ</item>
+        <item for="description" lang="el">Αλλαγές που αφορούν τη διαχείριση ΦΠΑ</item>
+    </translations>
+	<language_variables>
+		<item lang="en" id="cannot_alter_reserved_destination">You are not allowed to alter this destination.</item>	
+		<item lang="el" id="cannot_alter_reserved_destination">Δεν επιτρέπεται η αλλαγή/διαγραφή της παρούσης τοποθεσίας.</item>	
+    </language_variables>
+   <functions>
+		<item for="install">fn_my_taxes_install</item>
+	</functions>
+	<settings layout="separate" edition_type="ROOT,ULT:VENDOR">
+		<sections>
+			<section id="destination_field_ids">
+				<name>Destination field ids</name>	
+				<translations>
+					<item for="name" lang="el">Ids πεδίων Τοποθεσίας</item>
+				</translations>
+				<items>
+					<item id="pos1">
+						<type>input</type>
+						<name>pos1</name>
+					
+						<translations>
+					    	<item for="name" lang="el">pos1</item>
+					    </translations>
+					</item>
+					<item id="pos2">
+						<type>input</type>
+						<name>pos2</name>
+					
+						<translations>
+					    	<item for="name" lang="el">pos2</item>
+					    </translations>
+					</item>
+					<item id="pos3">
+						<type>input</type>
+						<name>pos3</name>
+					
+						<translations>
+					    	<item for="name" lang="el">pos3</item>
+					    </translations>
+					</item>
+					<item id="pos4">
+						<type>input</type>
+						<name>pos4</name>
+					
+						<translations>
+					    	<item for="name" lang="el">pos4</item>
+					    </translations>
+					</item>
+					<item id="pos5">
+						<type>input</type>
+						<name>pos5</name>
+					
+						<translations>
+					    	<item for="name" lang="el">pos5</item>
+					    </translations>
+					</item>
+				</items>
+			</section>	
+		</sections>
+	</settings>
+</addon>
