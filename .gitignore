@@ -4,3 +4,4 @@
 *.zip
 *.log
 .vagrant/
+config_local.php
