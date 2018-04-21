@@ -26,7 +26,7 @@
 			</tbody>
 		</table>		
 		
-		{include file="buttons/button.tpl" but_text=__("product_list_confirm")  but_role="submit" but_meta="ty-btn__primary" but_name="dispatch[products_list.confirm]"}
+		{include file="buttons/button.tpl" but_text=__("confirm_product_list")  but_role="submit" but_meta="ty-btn__primary" but_name="dispatch[products_list.confirm]"}
 	</form>
 </div>
 {capture name="mainbox_title"}{__("confirm_product_list")}{/capture}

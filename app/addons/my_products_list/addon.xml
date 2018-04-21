@@ -53,11 +53,11 @@
 		<item lang="en" id="upload_product_list">Upload product list</item>	
 		<item lang="el" id="upload_product_list">Μεταφόρτωση λίστας αγοράς</item>
 		<item lang="en" id="text_upload_product_list">Download and update either of the two demo files provided. Upload the updated file by using the 'upload file' link. Click on the 'add to cart' button.</item>	
-		<item lang="el" id="text_upload_product_list">Κατεβάστε και ενημερώστε έναν απ'τους δύο τύπους πρότυπων αρχείων μέσω των αντίστοιχων συνδέσμων. Επιλέξτε το αρχείο το αρχείο μέσω του συνδέσμου 'Ανέβασμα αρχείου'. Κάντε κλικ στο κουμπί 'προσθήκη στο καλάθι'.</item>
+		<item lang="el" id="text_upload_product_list">Κατεβάστε και ενημερώστε έναν απ'τους δύο τύπους πρότυπων αρχείων μέσω των αντίστοιχων συνδέσμων. Επιλέξτε το αρχείο το αρχείο μέσω του συνδέσμου 'Ανέβασμα αρχείου'. Κάντε κλικ στο κουμπί 'Προσθήκη στο καλάθι'.</item>
 		<item lang="en" id="manual_product_list">Manual product list</item>	
 		<item lang="el" id="manual_product_list">Εισαγωγή λίστας αγοράς</item>
 		<item lang="en" id="text_manual_product_list">Update the product quantities in the downloaded list.Upload the updated file by using the 'upload file' link.Click on the 'add to cart' button.</item>	
-		<item lang="el" id="text_upload_product_list">Εισάγετε στη φόρμα τους κωδικούς και την ποσότητα ανά προϊόν που επιθυμείτε από το αρχείο της λίστας προϊόντων που κατεβάσατε. Μπορείτε να προσθέσετε κωδικούς μέσω του κουμπιού "Προσθήκη Προϊόντος" και να αφαιρέσετε μέσω του κουμπιού "-" που υπάρχει σε κάθε γραμμή. Κάντε κλικ στο κουμπί 'Προσθήκη στο Καλάθι'.</item>
+		<item lang="el" id="text_manual_product_list">Εισάγετε στη φόρμα τους κωδικούς και την ποσότητα ανά προϊόν που επιθυμείτε από το αρχείο της λίστας προϊόντων που κατεβάσατε. Μπορείτε να προσθέσετε κωδικούς μέσω του κουμπιού "Προσθήκη Προϊόντος" και να αφαιρέσετε μέσω του κουμπιού "-" που υπάρχει σε κάθε γραμμή. Κάντε κλικ στο κουμπί 'Προσθήκη στο Καλάθι'.</item>
 		<item lang="en" id="confirm_product_list">Confirm and add</item>	
 		<item lang="el" id="confirm_product_list">Επιβεβαίωση προσθήκης</item>
     </language_variables>
