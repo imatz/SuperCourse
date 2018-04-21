@@ -63,7 +63,8 @@
         {if $auth.user_id}
             <a href="{"auth.logout?redirect_url=`$return_current_url`"|fn_url}" rel="nofollow" class="ty-btn ty-btn__primary">{__("sign_out")}</a>
         {else}
-            <a href="{"http://supercourse-eshop.gr/index.php?dispatch=my_changes.my_info"|fn_url}" rel="nofollow" class="ty-btn ty-btn__secondary">{__("sign_in")}</a>
+            {*<a href="{"http://supercourse-eshop.gr/index.php?dispatch=my_changes.my_info"|fn_url}" rel="nofollow" class="ty-btn ty-btn__secondary">{__("sign_in")}</a> [POTE] etsi!*}
+            <a href="{"my_changes.my_info"|fn_url}" rel="nofollow" class="ty-btn ty-btn__secondary">{__("sign_in")}</a>
             <a href="{"profiles.add"|fn_url}" rel="nofollow" class="ty-btn ty-btn__primary">{__("register")}</a>
             {if $settings.Security.secure_auth != "Y"}
                 <div  id="login_block{$block.snapping_id}" class="hidden" title="{__("sign_in")}">

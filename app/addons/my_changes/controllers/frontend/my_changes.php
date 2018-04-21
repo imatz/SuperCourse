@@ -18,7 +18,7 @@ use Tygh\Session;
 use Tygh\Helpdesk;
 use Tygh\Mailer;
 use Tygh\Pdf;
-
+use Sync\DB;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
@@ -34,16 +34,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		$fmail = $mail_array[0];
 		
 		// eggrafi sti vasi me to fmail pou pliktrologise o xristis
-		$user_info = db_get_row("SELECT * FROM ?:users WHERE fmail = '$fmail' AND status = 'A'");
+		
+		// [POTE] asxoliasto
+		//$user_info = db_get_row("SELECT * FROM ?:users WHERE fmail = '$fmail' AND status = 'A'");
+		$user_info = db_get_row("SELECT * FROM ?:users WHERE fmail = ?s AND status = 'A'", $fmail);
 		$_SESSION['user_info'] = $user_info;
-		$check_mail = $user_info[email];
+		// [POTE]
+		// $check_mail = $user_info[email];
+		$check_mail = $user_info['email'];
 		$_SESSION['fmail'] = $fmail;
 		/*$check_for_email = db_query("SELECT * FROM ?:users WHERE fmail='$fmail'");
 		fn_print_die($check_for_email);*/
 			
 		// metra poses fores yparxei to email pou exei pliktrologisei o xristis.
-		$emails_counter = db_get_array("SELECT COUNT(*) FROM ?:users WHERE fmail = '$fmail' AND status = 'A'");
-		$num_of_rows = $emails_counter[0]['COUNT(*)'];
+		// [POTE] oti kai prohgoymenvs
+		//$emails_counter = db_get_array("SELECT COUNT(*) FROM ?:users WHERE fmail = '$fmail' AND status = 'A'");
+		// talaipvria
+		//$num_of_rows = $emails_counter[0]['COUNT(*)'];
+		$num_of_rows = db_get_field("SELECT COUNT(*) as CNT FROM ?:users WHERE fmail = ?s AND status = 'A'", $fmail);
 		
 		fn_get_user_short_info();
 		
@@ -64,10 +72,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		$uid = $user_info[user_id];
 	
 		$selected_uid = $_REQUEST['user_id'];
-		$customer_code = db_get_field("SELECT user_login FROM ?:users WHERE user_id = '$selected_uid'");
+		// [POTE] ante pali
+		// $customer_code = db_get_field("SELECT user_login FROM ?:users WHERE user_id = '$selected_uid'");
+		$customer_code = db_get_field("SELECT user_login FROM ?:users WHERE user_id = ?i", $selected_uid);
 	
 		// fernei to pass apo th gefyra - nikosgkil
-		$password = db_get_field("SELECT password FROM supeshop_bridge.customer WHERE supeshop_bridge.customer.Code = '$customer_code'");
+		// asxoliasto
+		// $password = db_get_field("SELECT password FROM supeshop_bridge.customer WHERE supeshop_bridge.customer.Code = '$customer_code'");
+		Db::use_bridge();
+		$password = db_get_field("SELECT password FROM customer WHERE Code = ?s", $customer_code);
+		Db::use_shop();
+		
 		$_SESSION['my_user_pass'] = $password;
 	
 		$_SESSION['login_id'] = $uid;
@@ -122,9 +137,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 			$u_data = fn_get_user_info($uid, false);
 			$user_login1 = $u_data['user_login']; 
 			//fn_print_die($u_data);
-			// fernei to pass apo th gefyra - nikosgkil
-			$password = db_get_field("SELECT password FROM supeshop_bridge.customer WHERE supeshop_bridge.customer.Code = '$user_login1'");
+			// fernei to pass apo th gefyra - nikosgkil - [POTE]
+			// $password = db_get_field("SELECT password FROM supeshop_bridge.customer WHERE supeshop_bridge.customer.Code = '$user_login1'");
 			
+			Db::use_bridge();
+			$password = db_get_field("SELECT password FROM customer WHERE Code = ?s", $user_login1);
+			Db::use_shop();
+
 			$email_for_login = $u_data['email'];
 			$user_login = $email_for_login;
 			$_REQUEST['user_login'] = $email_for_login;
@@ -289,13 +308,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		// fernei to user_id tou xrhsth
 		//$uid = db_get_field("SELECT user_id FROM ?:users WHERE email = '$fmail'");
 		
-		$uid = $user_info[user_id];
+		$uid = $user_info['user_id'];
 	
 		$selected_uid = $_REQUEST['user_id'];
-		$customer_code = db_get_field("SELECT user_login FROM ?:users WHERE user_id = '$selected_uid'");
+		// [POTE]
+		//$customer_code = db_get_field("SELECT user_login FROM ?:users WHERE user_id = '$selected_uid'");
+		$customer_code = db_get_field("SELECT user_login FROM ?:users WHERE user_id = ?i", $selected_uid);
 	
 		// fernei to pass apo th gefyra - nikosgkil
-		$password = db_get_field("SELECT password FROM supeshop_bridge.customer WHERE supeshop_bridge.customer.Code = '$customer_code'");
+		// $password = db_get_field("SELECT password FROM supeshop_bridge.customer WHERE supeshop_bridge.customer.Code = '$customer_code'");
+		Db::use_bridge();
+		$password = db_get_field("SELECT password FROM customer WHERE Code = ?s", $customer_code);
+		Db::use_shop();
 		$_SESSION['my_user_pass'] = $password;
 	
 		if(isset($_REQUEST['user_id']))
@@ -361,13 +385,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		/************ nikosgkil pare to prod_id, onoma, classroom kai typwse ta se pdf ******************/
 		/************************************************************************************************/
 		//fn_print_die($_SESSION);
-		$dispatch = $_REQUEST[dispatch];
+		// [ELEOS]
+		//$dispatch = $_REQUEST[dispatch];
+		$dispatch = $_REQUEST['dispatch'];
 		$pieces = explode(".", $dispatch);
 		$prod_id = (int)$pieces[2];
-		$classroom = $_REQUEST[classroom];
+		//$classroom = $_REQUEST[classroom];
+		$classroom = $_REQUEST['classroom'];
 		$code = fn_my_product_packages_get_code($prod_id);
 		$name = $_SESSION['cart']['user_data']['firstname'];
-		$name_question = $_REQUEST[onoma];
+		//$name_question = $_REQUEST[onoma];
+		$name_question = $_REQUEST['onoma'];
 		/************************************************************************************************/
 		/************ nikosgkil pare to prod_id, onoma, classroom kai typwse ta se pdf ******************/
 		/************************************************************************************************/
@@ -375,7 +403,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		/***** retail price *****/
 		$user_id = $_SESSION['login_id'];
 		$teliko_prodid[] =  db_get_fields("SELECT product_id FROM ?:package_products WHERE package_id = ?i", $prod_id);
-		$usergroup_id = db_get_field("SELECT usergroup_id FROM cscart_usergroup_links WHERE status = 'A' AND user_id = '$user_id' AND link_id = '$teliko_prodid'");
+		$usergroup_id = db_get_field("SELECT usergroup_id FROM cscart_usergroup_links WHERE status = 'A' AND user_id = '$user_id' AND link_id = '$teliko_prodid'"); // ayto tvra doyleyei?
 		
 		
 		$metritis_proiontwn = count($teliko_prodid[0]);
@@ -435,13 +463,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		/************ nikosgkil pare to prod_id, onoma, classroom kai typwse ta se pdf ******************/
 		/************************************************************************************************/
 		//fn_print_die($_SESSION);
-		$dispatch = $_REQUEST[dispatch];
+		$dispatch = $_REQUEST['dispatch'];
 		$pieces = explode(".", $dispatch);
 		$prod_id = (int)$pieces[2];
-		$classroom = $_REQUEST[classroom];
+		$classroom = $_REQUEST['classroom'];
 		$code = fn_my_product_packages_get_code($prod_id);
 		$name = $_SESSION['cart']['user_data']['firstname'];
-		$name_question = $_REQUEST[onoma];
+		$name_question = $_REQUEST['onoma'];
 		/************************************************************************************************/
 		/************ nikosgkil-pare to prod_id, onoma, classroom kai typwse ta se pdf ******************/
 		/************************************************************************************************/
