@@ -5,8 +5,10 @@
 		<input type="hidden" name="popup_id" value="{$popup.popup_id}">
 		<div class="my_login_prompt">
 				<div class="my_login_prompt_buttons ty-float-left">
-					<a class="ty-btn ty-btn__secondary login_prompt_show_form" rel="nofollow">{__("school")}</a>
-					<a class="ty-btn ty-btn__secondary login_prompt_show_form" rel="nofollow">{__("bookshop")}</a>
+					{*<a class="ty-btn ty-btn__secondary login_prompt_show_form" rel="nofollow">{__("school")}</a>
+					<a class="ty-btn ty-btn__secondary login_prompt_show_form" rel="nofollow">{__("bookshop")}</a>*}
+					<a href="{"my_changes.my_info"|fn_url}" class="ty-btn ty-btn__secondary" rel="nofollow">{__("school")}</a>
+					<a href="{"my_changes.my_info"|fn_url}" class="ty-btn ty-btn__secondary" rel="nofollow">{__("bookshop")}</a>
 					{if 'Y'==$retail_enabled}<a href="{"profiles.retail"|fn_url}" class="ty-btn ty-btn__secondary" rel="nofollow">{__("retail_customer")}</a>{/if}	
 					<a href="{"profiles.register"|fn_url}" rel="nofollow" class="ty-btn ty-btn__primary">{__("register")}</a>					
 				</div>
@@ -14,7 +16,7 @@
 					{include file="blocks/static_templates/logo.tpl"}
 					<div id="login_prompt_text">
 						<p>{__('login_prompt_text')}</p>
-					</div>	
+					</div>	 
 					<div class="ty-login-popup hidden" id="my_login_prompt_form_container">
 						{include file="views/auth/login_form.tpl" style="popup" id="my_login_form_prompt"}
 					</div>
