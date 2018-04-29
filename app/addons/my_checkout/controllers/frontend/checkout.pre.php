@@ -110,6 +110,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				Tygh::$app['view']->assign('checkout_account_exists',__('checkout_email_exists_info'));
 			}
 		}
+		
+		// an to thlefvno yparxei emfanise mnm gia syndesh h synexeia vs pelaths lianikhs
+		if (empty($auth['user_id']) && 'step_two' == $_REQUEST['update_step'] && 
+			(!empty($_REQUEST['user_data']['s_phone']) || !empty($_REQUEST['user_data']['s_phones']))) {
+			
+			if (!empty($_REQUEST['user_data']['s_phone'])) {
+				$account_exists_and_enabled = fn_phone_user_exists($_REQUEST['user_data']['s_phone']);
+				// koita kai sta profil
+				if (!$account_exists_and_enabled)
+					$account_exists_and_enabled = fn_profile_phone_user_exists($_REQUEST['user_data']['s_phone']);
+				
+				if ($account_exists_and_enabled) {
+					Tygh::$app['view']->assign('checkout_account_exists',__('checkout_phone_exists_info'));
+				}
+			}
+			
+			if (!$account_exists_and_enabled && !empty($_REQUEST['user_data']['s_phones'])) {
+				foreach ($_REQUEST['user_data']['s_phones'] as $phone) {	
+					$account_exists_and_enabled = fn_profile_phone_user_exists($phone);
+					//koita kai sta profil
+					if (!$account_exists_and_enabled)
+						$account_exists_and_enabled = fn_phone_user_exists($phone);
+					
+					if ($account_exists_and_enabled) {
+						Tygh::$app['view']->assign('checkout_account_exists',__('checkout_phone_exists_info'));
+						break;
+					}
+				}
+			}
+			
+		}
 
 		return array(CONTROLLER_STATUS_REDIRECT, 'checkout.checkout?' . http_build_query($redirect_params));
 	}

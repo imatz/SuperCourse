@@ -5,7 +5,7 @@
 		<input type="hidden" name="popup_id" value="{$popup.popup_id}">
 		<div class="my_checkout_login_or_continue">
 			<div id="my_checkout_login_or_continue_text">
-				{$checkout_account_exists}
+				{$checkout_account_exists nofilter}
 			</div>
 			<a href="{"my_changes.my_info"|fn_url}" class="ty-btn ty-btn__secondary ty-float-left" rel="nofollow">{__("login")}</a>
 			{include file="buttons/button.tpl" but_text=__("continue_as_retail_customer") but_meta="ty-btn__secondary ty-float-right cm-dialog-closer" }
