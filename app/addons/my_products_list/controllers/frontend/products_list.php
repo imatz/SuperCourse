@@ -1,13 +1,13 @@
 <?php
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Tygh\Pdf;
 
 if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
 if (empty($auth['user_id']) || ($auth['account_type']!='B'))
 	return array(CONTROLLER_STATUS_DENIED);
-
-
+	
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 	fn_add_breadcrumb(__('products_list'), 'products_list.view');	
@@ -118,6 +118,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 		
 		return array(CONTROLLER_STATUS_OK);
+		
+	} else if ($mode == 'print_err') {
+		list($product_list, $product_data) = fn_check_product_list($_REQUEST['error_list']);
+	
+		$html = '<style>#product_list_errors td{text-align:center;border-bottom:1px solid}</style><table id="product_list_errors" style="width:100%; font-size:20">';
+		$html .= '<thead>
+					<tr>
+						<th>'.__("code").'</th>
+						<th>'.__("product").'</th>
+						<th>'.__("quantity").'</th>
+						<th>'.__("error").'</th>
+					</tr>
+				</thead>
+				<tbody>';
+		foreach ($product_list as $pl) {
+			if (!empty($pl['error'])) {
+				$html .= '<tr>
+					<td>'.$pl['A'].'</td>
+					<td>'.$pl['product'].'</td>
+					<td>'.$pl['B'].'</td>
+					<td>'.$pl['error'].'</td>
+				</tr>';
+			}
+		}
+		$html.= '</tbody></table>';
+        Pdf::render(array($html), 'list_errors');
 	}
 	
 } else if ($mode == 'csv' || $mode == 'xls' || $mode == 'csv_demo' || $mode == 'xls_demo') {

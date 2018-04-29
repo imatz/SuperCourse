@@ -1,6 +1,6 @@
 
 <div id="content_products_list">
-	<form action="{""|fn_url}" method="post" name="forms_form" enctype="multipart/form-data">
+	<form action="{""|fn_url}" method="POST" name="forms_form">
 		<table class="ty-table" id="products_list_confirm_tbl">
 			<thead>
 				<tr>
@@ -13,9 +13,9 @@
 			<tbody>
 			{foreach from=$product_list item=pl key=no}
 				<tr>
-					<td>{if !$pl.error}<input type="hidden" name="product_list[{$no}][A]" value="{$pl.A}">{/if}{$pl.A}</td>
+					<td><input type="hidden" name="{if !$pl.error}product_list{else}error_list{/if}[{$no}][A]" value="{$pl.A}">{$pl.A}</td>
 					<td>{$pl.product}</td>
-					<td>{if !$pl.error}<input type="hidden" name="product_list[{$no}][B]" value="{$pl.B}">{/if}{$pl.B}</td>
+					<td><input type="hidden" name="{if !$pl.error}product_list{else}error_list{/if}[{$no}][B]" value="{$pl.B}">{$pl.B}</td>
 					<td>{$pl.error}</td>
 				</tr>
 			{foreachelse}
@@ -27,6 +27,7 @@
 		</table>		
 		
 		{include file="buttons/button.tpl" but_text=__("confirm_product_list")  but_role="submit" but_meta="ty-btn__primary" but_name="dispatch[products_list.confirm]"}
+		{include file="buttons/button.tpl" but_text=__("print_product_list_errors")  but_role="submit" but_meta="ty-btn__secondary ty-float-right" but_name="dispatch[products_list.print_err]"}
 	</form>
 </div>
 {capture name="mainbox_title"}{__("confirm_product_list")}{/capture}
