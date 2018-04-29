@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $cart['user_data']['s_lastname']=$_REQUEST['user_data']['lastname'];
     }
 	
-  if ($mode == 'update_steps') {
+	if ($mode == 'update_steps') {
 
 		// an epitrepetai allaje to tim_lian
 		if (!empty($_REQUEST['tim_lian']) && in_array($auth['tim_lian'], array("TL","LT"))) {
@@ -100,9 +100,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		fn_save_cart_content($cart, $auth['user_id']);
     
-    $redirect_params = fn_i_checkout_update_steps($cart, $auth, $_REQUEST); // disabled email check on guest checkout
+		$redirect_params = fn_i_checkout_update_steps($cart, $auth, $_REQUEST); // disabled email check on guest checkout
+	
+	
+		// an to fmail yparxei emfanise mnm gia syndesh h synexeia vs pelaths lianikhs
+		if (empty($auth['user_id']) && 'step_one' == $_REQUEST['update_step'] && !empty($_REQUEST['user_data']['email'])) {
+			$account_exists_and_enabled = fn_fmail_user_exists($_REQUEST['user_data']['email']);
+			if ($account_exists_and_enabled) {
+				Tygh::$app['view']->assign('checkout_account_exists',__('checkout_email_exists_info'));
+			}
+		}
 
-    return array(CONTROLLER_STATUS_REDIRECT, 'checkout.checkout?' . http_build_query($redirect_params));
+		return array(CONTROLLER_STATUS_REDIRECT, 'checkout.checkout?' . http_build_query($redirect_params));
 	}
   
    

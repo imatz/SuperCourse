@@ -31,7 +31,7 @@
                 {assign var="title" value="{__("signed_in_as")} `$login_info`"}
             {*/if*}
             
-            {hook name="checkout:edit_link_title"}
+            {hook name="checkout:step_one_edit_link_title"}
             {if $contact_info_population && !$edit}
                 <a class="ty-step__title-txt cm-ajax" href="{"checkout.checkout?edit_step=step_one&from_step=`$edit_step`"|fn_url}" data-ca-target-id="checkout_*">{$title|strip_tags nofilter}</a>
             {else}

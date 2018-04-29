@@ -256,3 +256,8 @@ function fn_i_checkout_update_steps(&$cart, &$auth, $params)
 
     return $redirect_params;
 }
+
+function fn_fmail_user_exists($fmail) {
+	$id = db_get_field("SELECT user_id FROM ?:users WHERE status='A' AND fmail=?s", $fmail);
+	return !empty($id);
+}
