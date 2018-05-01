@@ -126,7 +126,7 @@ function fn_my_custom_parameters_get_categories_before_cut_levels (&$categories_
 function fn_my_custom_parameters_remove_empty_categories($list)
 {	/* 
 	*	kvdikas poy afairei anadromika oles tis kenes apo proionta kai ypokathgories kathgories
-	
+	*/
 	foreach ($list as $no=>&$item) {
 		if (isset($item['subcategories'])) {
 			if (!empty($item['subcategories']))	$item['subcategories'] = fn_my_custom_parameters_remove_empty_categories($item['subcategories']);
@@ -139,7 +139,7 @@ function fn_my_custom_parameters_remove_empty_categories($list)
 			if (empty($tree_product_count)) unset($list[$no]);
 		}
 	}
-	*/
+	 /*
 	foreach ($list as $no=>&$item) {
 		if (isset($item['subcategories'])) {
 			
@@ -151,5 +151,6 @@ function fn_my_custom_parameters_remove_empty_categories($list)
 			if (empty($children_no) && 0==$item['product_count']) unset($list[$no]);
 		}
 	}
+	*/
 	return $list;
 }
