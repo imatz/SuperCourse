@@ -1,11 +1,4 @@
 <div id="content_products_list">
-	<h3>{__("download_product_list")}</h3>
-	<div class="info_text">{__("text_download_product_list")}</div>
-	
-	{include file="buttons/button.tpl" but_text=__("download_xls") but_href="products_list.xls" but_meta="ty-btn__secondary"}
-	{include file="buttons/button.tpl" but_text=__("download_csv") but_href="products_list.csv" but_meta="ty-btn__secondary"}
-	<hr>
-	<h3>{__("upload_product_list")}</h3>
 	<div class="info_text">{__("text_upload_product_list")}</div>
 	
 	{include file="buttons/button.tpl" but_text=__("download_xls_demo") but_href="products_list.xls_demo" but_meta="ty-btn__text"}
@@ -55,7 +48,7 @@
 		});
 	</script>
 {/literal}
-{capture name="mainbox_title"}{__("products_list")}{/capture}
+{capture name="mainbox_title"}{__("upload_product_list")}{/capture}
 
 
 

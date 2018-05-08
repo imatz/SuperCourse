@@ -10,7 +10,7 @@ if (empty($auth['user_id']) || ($auth['account_type']!='B'))
 	
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
-	fn_add_breadcrumb(__('products_list'), 'products_list.view');	
+	fn_add_breadcrumb(__('upload_product_list'), 'products_list.view');	
 	
     if ($mode == 'upload') { 
 		fn_add_breadcrumb(__('upload_product_list'));
@@ -190,6 +190,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			//	->setCellValue('C' . $i, fn_format_price($product['retail_data']['price']));
 		}	
 		
+	} else { // demo
+		// dummy data
+		$spreadsheet->getActiveSheet()->setCellValue('A2', 'SIB1M07')
+				->setCellValue('B2', 1);
+		$spreadsheet->getActiveSheet()->setCellValue('A3', 'SB1M01')
+				->setCellValue('B3', 1);
+		$spreadsheet->getActiveSheet()->setCellValue('A4', 'CEDMB101')
+				->setCellValue('B4', 2);
 	}
 	
 	if ($mode == 'csv' || $mode == 'csv_demo') {
@@ -213,5 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	exit;
 	
 } else if ($mode == 'view') {
-	fn_add_breadcrumb(__('products_list'));	
+	fn_add_breadcrumb(__('upload_product_list'));	
+} else if ($mode == 'download') {
+	fn_add_breadcrumb(__('download_product_list'));	
 }

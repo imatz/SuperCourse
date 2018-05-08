@@ -17,7 +17,8 @@
 	{*se sxolio ta parastatika dioti den leitourgoun*}
 	{*<li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a underlined" href="http://kaligasvouchers.dyndns.org/vouchers/index.php" target="blank" rel="nofollow">{__("vouchers")}</a></li>*}
 	{if $auth.account_type=="B"}
-	<li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a underlined" href="{"products_list.view"|fn_url}" rel="nofollow">{__("products_list")}</a></li>
+	<li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a underlined" href="{"products_list.download"|fn_url}" rel="nofollow">{__("download_product_list")}</a></li>
+	<li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a underlined" href="{"products_list.view"|fn_url}" rel="nofollow">{__("upload_product_list")}</a></li>
 	{else if $auth.account_type=="S"}
 	<li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a underlined" href="{"products.add"|fn_url}" rel="nofollow">{__("new_package")}</a></li>
 	<li class="ty-account-info__item ty-dropdown-box__item"><a class="ty-account-info__a underlined" href="{"index.php?search_performed=Y&status=A&creation=S&dispatch%5Bproducts.manage%5D=&security_hash=529add5edf3be9eb5e97814b92bc9164"|fn_url}" rel="nofollow">{__("my_packages")}</a></li>
