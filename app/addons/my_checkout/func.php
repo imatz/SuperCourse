@@ -256,8 +256,21 @@ function fn_i_checkout_update_steps(&$cart, &$auth, $params)
 
     return $redirect_params;
 }
-
+/* Elegxos kata to checkout */
 function fn_fmail_user_exists($fmail) {
 	$id = db_get_field("SELECT user_id FROM ?:users WHERE status='A' AND fmail=?s", $fmail);
+	return !empty($id);
+}
+
+function fn_phone_user_exists($phone) {
+	$id = db_get_field("SELECT user_id FROM ?:users WHERE status='A' AND phone=?s", $phone);
+	return !empty($id);
+}
+
+
+function fn_profile_phone_user_exists($phone) {
+	$id = db_get_field("SELECT p.user_id FROM ?:user_profile_phones p
+	INNER JOIN ?:users u ON p.user_id = u.user_id	
+	WHERE u.status='A' AND p.phone=?s", $phone);
 	return !empty($id);
 }
