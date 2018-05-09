@@ -134,7 +134,8 @@ function fn_my_custom_parameters_remove_empty_categories($list)
 			if (empty($item['subcategories']) && 0==$item['product_count']) unset($list[$no]);
 			
 		} else {
-			$tree_product_count = db_get_field("SELECT SUM(product_count) FROM ?:categories WHERE category_id=?i OR id_path LIKE ?l",$item['category_id'],$item['id_path'].'%');
+			$tree_product_count = db_get_field("SELECT SUM(product_count) FROM ?:categories 
+			WHERE (" . fn_find_array_in_set($_SESSION['auth']['usergroup_ids'], '?:categories.usergroup_ids', true) . ") AND (category_id=?i OR id_path LIKE ?l )",$item['category_id'],$item['id_path'].'%');
 			
 			if (empty($tree_product_count)) unset($list[$no]);
 		}
