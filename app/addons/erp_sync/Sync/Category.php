@@ -53,12 +53,24 @@ class Category extends Master
 		
 		}
 		$this->mark_csv();
+		// ok Customergroups
+		$group_bridge= new Customergroup();
+		$group_data=$this->get_unsynced_Customergroups();
+		$group_bridge->set_csv_data($group_data);
+		$group_bridge->sync_bridge();
+		
 		echo '.. Categories bridge synced ..<br>';
 	}
 	
 	public function sync_shop()
 	{
 		if (!empty($this->csv_data)) { // an eixame csv
+			// sygxronise pvta ta Productgroups
+			$group_bridge= new Customergroup();
+			$group_bridge->sync_shop();	
+			
+			$Customergroup_map = Customergroup::get_Customergroup_ids();
+		
 			//pame gia delete osvn den enhmervuhkan
 			
 			$del_data=$this->get_erp_unsynced_data();
@@ -83,6 +95,7 @@ class Category extends Master
 					$parent_row=$this->get_bridge_row(array('Code'=>$un['Parent']));
 					if (!empty($parent_row)) $parent_id=$parent_row['shop_category_id'];
 				} 
+				
 				$shop_data=array(
 					"category"=>$un['Name'],
 					'status'=>$un['Active'], 
@@ -90,6 +103,17 @@ class Category extends Master
 					'position'=>$un['Sort'],
 					'company_id'=>1
 				);
+				
+				// usergroups
+				
+				if (!empty($un['CustomerGroup'])) {
+					$tmp = explode(',', $un['CustomerGroup']);
+					foreach ($tmp as $t) {
+						if (!empty($Customergroup_map[$t])) {
+							$shop_data['usergroup_ids'][] = $Customergroup_map[$t];
+						}
+					}
+				}
 				
 				if(empty($un['shop_category_id'])) { //create
 					
@@ -144,5 +168,31 @@ class Category extends Master
 		$data['shop_category_id']=null;
 		$this->update_bridge(array('shop_category_id'=>$id),$data);
 	}
+	
+	public function get_unsynced_Customergroups()
+	{
+		$data=array();
+		$data['R'] = array('CustomerGroup'=>'R'); // Lianikh einai standard
+		try {
+			Db::use_bridge();
+			$result=db_get_array("SELECT DISTINCT CustomerGroup FROM {$this->table} WHERE IFNULL(shop_updated,0)=0 AND erp_updated=1 AND CustomerGroup IS NOT NULL AND CustomerGroup <> ''");
+			Db::use_shop();			
+			
+			foreach ($result as $res) {
+				$tmp = explode(',', $res['CustomerGroup']);
+				foreach ($tmp as $t) {
+					if (empty($data[$t])) {
+						$data[$t]=array('CustomerGroup'=>$t);
+					}
+				}
+			}
+			
+		}catch (\Exception $e){
+			Db::use_shop();
+			throw $e;
+		}
+		return $data;
+	}
+	
 	
 }

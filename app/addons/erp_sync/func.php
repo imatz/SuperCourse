@@ -84,9 +84,12 @@ function fn_erp_sync_delete_tax_pre($tax_id)
 function fn_erp_sync_delete_usergroups($usergroup_ids)
 {
 	if(!empty($usergroup_ids)) {
-		$bridge= new Sync\Pricegroup();
-		foreach ($usergroup_ids as $id)
-			$bridge->clear_shop_id($id); 
+		$price_bridge= new Sync\Pricegroup();
+		$customer_bridge= new Sync\Customergroup();
+		foreach ($usergroup_ids as $id){
+			$price_bridge->clear_shop_id($id); 
+			$customer_bridge->clear_shop_id($id); 
+		}
 	}
 }
 
