@@ -54,11 +54,12 @@ class Category extends Master
 		}
 		$this->mark_csv();
 		// ok Customergroups
+		/*
 		$group_bridge= new Customergroup();
 		$group_data=$this->get_unsynced_Customergroups();
 		$group_bridge->set_csv_data($group_data);
 		$group_bridge->sync_bridge();
-		
+		*/
 		echo '.. Categories bridge synced ..<br>';
 	}
 	
@@ -66,11 +67,12 @@ class Category extends Master
 	{
 		if (!empty($this->csv_data)) { // an eixame csv
 			// sygxronise pvta ta Productgroups
+			/*
 			$group_bridge= new Customergroup();
 			$group_bridge->sync_shop();	
 			
 			$Customergroup_map = Customergroup::get_Customergroup_ids();
-		
+			*/
 			//pame gia delete osvn den enhmervuhkan
 			
 			$del_data=$this->get_erp_unsynced_data();
@@ -105,7 +107,7 @@ class Category extends Master
 				);
 				
 				// usergroups
-				
+				/*
 				if (!empty($un['CustomerGroup'])) {
 					$tmp = explode(',', $un['CustomerGroup']);
 					foreach ($tmp as $t) {
@@ -114,7 +116,7 @@ class Category extends Master
 						}
 					}
 				}
-				
+				*/
 				if(empty($un['shop_category_id'])) { //create
 					
 					if (!$category_id=fn_update_category($shop_data, 0))
