@@ -240,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	} else {
 		foreach ($products_images as $pr_img) {
 			$pair = array_pop($pr_img);
-			$zip->addFile($pair['detailed']['absolute_path']);
+			$zip->addFile($pair['detailed']['absolute_path'], fn_basename($pair['detailed']['absolute_path']));
 		}
 		$zip->close();
 		fn_get_file($file, 'Supercourse_list_images.zip', true);
