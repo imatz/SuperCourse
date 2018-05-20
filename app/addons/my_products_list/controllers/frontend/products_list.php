@@ -220,6 +220,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 	exit;
 	
+} else if ($mode == 'images') {
+	
+	$products = fn_get_products(array());
+	$products = $products[0];
+	
+	$product_ids = fn_array_column($products, 'product_id');
+	$products_images = fn_get_image_pairs($product_ids, 'product', 'M');
+	
+	$file = fn_create_temp_file();	
+	
+	$zip = new ZipArchive();
+	
+	$created = $zip->open($file, ZipArchive::CREATE);
+	
+	if ($created !== TRUE) {
+		fn_set_notification('E', __('error'), __('products_list_file_error'));
+		return array(CONTROLLER_STATUS_REDIRECT, 'products_list.download');
+	} else {
+		foreach ($products_images as $pr_img) {
+			$pair = array_pop($pr_img);
+			$zip->addFile($pair['detailed']['absolute_path']);
+		}
+		$zip->close();
+		fn_get_file($file, 'Supercourse_list_images.zip', true);
+	}	
+	
 } else if ($mode == 'view') {
 	fn_add_breadcrumb(__('upload_product_list'));	
 } else if ($mode == 'download') {

@@ -43,15 +43,20 @@ function fn_check_product_list($product_list)
 				$product_list[$key]['error'] = __('products_list_wrong_quantity');
 			}
 			
-			$product_id = db_get_field('SELECT product_id FROM ?:products WHERE product_code = ?s', $pl['A']);
-			if (empty($product_id) || empty($products[$product_id])) {
+			$product_row = db_get_row("SELECT product_id, package FROM ?:products WHERE status='A' AND product_code = ?s", $pl['A']);
+			if (empty($product_row['product_id']) || ('Y' != $product_row['package'] && empty($products[$product_row['product_id']]))) {
 				$product_list[$key]['error'] .= ' ' . __('products_list_wrong_code');
 			} else {
-				$product_list[$key]['product'] = $products[$product_id]['product']; 
+				if ('Y' != $product_row['package']) {
+					$product_list[$key]['product'] = $products[$product_row['product_id']]['product']; 
+				} else {
+					list($tmp, $junk)=fn_get_products(array('pid'=>array($product_row['product_id']),'packages'=>'Y'));
+					$product_list[$key]['product'] = $tmp[$product_row['product_id']]['product'];
+				}
 			}
 			
 			if (empty($product_list[$key]['error']))
-				$product_data[$product_id] = array('product_id'=>$product_id, 'amount'=>$amount);
+				$product_data[$product_row['product_id']] = array('product_id'=>$product_row['product_id'], 'amount'=>$amount);
 		}
 	
 	}
