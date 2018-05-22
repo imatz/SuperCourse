@@ -127,15 +127,23 @@ function fn_my_custom_parameters_remove_empty_categories($list)
 {	/* 
 	*	kvdikas poy afairei anadromika oles tis kenes apo proionta kai ypokathgories kathgories
 	*/
+	$usergroup_ids = !empty($_SESSION['auth']['usergroup_ids']) ? $_SESSION['auth']['usergroup_ids'] : array();
+	
 	foreach ($list as $no=>&$item) {
 		if (isset($item['subcategories'])) {
 			if (!empty($item['subcategories']))	$item['subcategories'] = fn_my_custom_parameters_remove_empty_categories($item['subcategories']);
-	
-			if (empty($item['subcategories']) && 0==$item['product_count']) unset($list[$no]);
+			
+		 	$item_product_count = db_get_field("SELECT COUNT(*) FROM ?:products_categories 
+			INNER JOIN ?:products ON ?:products.product_id = ?:products_categories.product_id AND ?:products.status = 'A' AND (" . fn_find_array_in_set($usergroup_ids, "?:products.usergroup_ids", true) . ")
+			WHERE ?:products_categories.category_id = ?i", $item['category_id']);
+
+			if (empty($item['subcategories']) && 0==$item_product_count) unset($list[$no]);
 			
 		} else {
-			$tree_product_count = db_get_field("SELECT SUM(product_count) FROM ?:categories 
-			WHERE (" . fn_find_array_in_set($_SESSION['auth']['usergroup_ids'], '?:categories.usergroup_ids', true) . ") AND (category_id=?i OR id_path LIKE ?l )",$item['category_id'],$item['id_path'].'%');
+			$tree_product_count = db_get_field("SELECT COUNT(*) FROM ?:categories
+			INNER JOIN ?:products_categories ON ?:products_categories.category_id = ?:categories.category_id
+			INNER JOIN ?:products ON ?:products.product_id = ?:products_categories.product_id AND ?:products.status = 'A' AND (" . fn_find_array_in_set($usergroup_ids, "?:products.usergroup_ids", true) . ")
+			WHERE (" . fn_find_array_in_set($usergroup_ids, '?:categories.usergroup_ids', true) . ") AND (?:categories.category_id=?i OR ?:categories.id_path LIKE ?l )",$item['category_id'],$item['id_path'].'%');
 			
 			if (empty($tree_product_count)) unset($list[$no]);
 		}
