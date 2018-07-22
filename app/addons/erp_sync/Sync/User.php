@@ -28,6 +28,10 @@ class User extends Master
   public function clear()
   {
     if (!parent::clear()) return;
+	
+	// prvta kauarizoyme to user_id apo tis synueseis gia na mh sbhstoyn
+	db_query("UPDATE ?:package_data SET user_id = 0");
+	
     $user_ids = $this->get_shop_clear_data();
     foreach ($user_ids as $uid)
       fn_delete_user($uid);
@@ -201,6 +205,13 @@ class User extends Master
 			//}catch (NoMailException $e) {echo 'didn t send mail for user '.$user_id; }
 			
 			if (empty($user_id)) throw new \Exception('Error syncing user {'.var_export($un,true).'}');
+			
+			// 07-2018 epanafora paraggelivn synuesevn
+			if (empty($un['shop_user_id'])) {
+				db_query("UPDATE ?:orders SET user_id=?i WHERE user_login=?s", $user_id, $un['Code']);
+				db_query("UPDATE ?:package_data SET user_id=?i WHERE user_login=?s", $user_id, $un['Code']);
+			}
+			
 			$un['shop_user_id']=$user_id;
 			
 			//pame gia ta usergroups

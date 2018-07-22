@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					$product_data['category_ids'] = array(fn_my_product_packages_get_setting_field('packages_category'));
 					$product_data['product_code'] = fn_my_product_packages_generate_code();
 					$product_data['package_data']['user_id'] = $auth['user_id'];
+					$product_data['package_data']['user_login'] = fn_get_user_login($auth['user_id']); // addons/my_order_vouchers/func.php
 					$product_data['package_data']['creation'] = $_REQUEST['product_data']['package_data']['creation'];
 					$product_data['package_products']=$_REQUEST['product_data']['package_products'];
 				}

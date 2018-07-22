@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+    <id>my_order_progress</id>
+    <name>ioannis m.: My Order Progress</name>
+    <description>Frontend order progress monitor and modify</description>
+    <version>1.0</version>
+    <priority>200001</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>en</default_language>
+    <status>active</status>
+	<translations>
+    	<item for="name" lang="el">ioannis m.: Παρακολούθηση Παραγγελίας</item>
+        <item for="description" lang="el">Παρακολούθηση και Τροποποίηση παραγγελιών στο frontend</item>
+    </translations>
+	 
+    <language_variables>
+		<item lang="en" id="order_progress">Order Progress</item>	
+		<item lang="el" id="order_progress">Εξέλιξη Παραγγελίας</item>
+		<item lang="en" id="track_order">Track order</item>	
+		<item lang="el" id="track_order">Εντοπισμός</item>		
+		<item lang="en" id="cancel_order">Cancel</item>	
+		<item lang="el" id="cancel_order">Ακύρωση</item>
+		<item lang="en" id="review_order">Review</item>	
+		<item lang="el" id="review_order">Αναθεώρηση</item>
+		<item lang="en" id="progress_status_registered">Registered</item>	
+		<item lang="el" id="progress_status_registered">Καταχωρήθηκε</item>	
+		<item lang="en" id="progress_status_processed">Processed</item>	
+		<item lang="el" id="progress_status_processed">Σε επεξεργασία</item>	
+		<item lang="en" id="progress_status_sent">Sent</item>	
+		<item lang="el" id="progress_status_sent">Έχει αποσταλεί.</item>	
+		<item lang="el" id="text_order_cancelled">Η παραγγελία σας με Νο: [order_id] ακυρώθηκε με επιτυχία!</item>	
+    </language_variables>
+	
+	<queries>
+		<item for="install">
+			ALTER TABLE `?:package_products` 
+			ADD COLUMN `product_code` VARCHAR(32) NULL AFTER `product_id`;
+			UPDATE `?:package_products` pp 
+			INNER JOIN `?:products` p ON pp.product_id = p.product_id 
+			SET pp.product_code = p.product_code
+		</item>
+		<item for="install">
+			ALTER TABLE `?:package_data` 
+			ADD COLUMN `user_login` INT NULL DEFAULT 0 AFTER `c_discount_value`;
+			UPDATE `?:package_data` o
+			INNER JOIN `?:users` u ON o.user_id = u.user_id AND o.user_login != u.user_login
+			SET o.user_login = u.user_login;
+		</item>
+		<item for="install">
+			ALTER TABLE `?:orders` 
+			ADD COLUMN `user_login` INT NULL DEFAULT 0 AFTER `delivery_notes`;
+			ALTER TABLE `?:orders` 
+			ADD COLUMN `tracking_code` VARCHAR(512) NULL DEFAULT '' AFTER `delivery_notes`;
+			UPDATE `?:orders` o
+			INNER JOIN `?:users` u ON o.user_id = u.user_id AND o.user_login != u.user_login
+			SET o.user_login = u.user_login;
+		</item>
+		<item for="install">
+			ALTER TABLE `?:shippings` 
+			ADD COLUMN `tracking_url` IF NOT EXISTS VARCHAR(512) NULL DEFAULT '' AFTER `status`;
+		</item>
+		<item for="install">
+			INSERT INTO `?:statuses` (`status`, `type`, `is_default`) VALUES ('E', 'O', 'Y');
+			INSERT INTO `?:status_descriptions` (`status`, `type`, `description`, `lang_code`) VALUES ('E', 'O', 'Εισαγωγή από ERP', 'el');
+		</item>
+		<item for="install">
+			CREATE TABLE IF NOT EXISTS `?:order_sync_queue` (
+			  `order_id` int(11) NOT NULL,
+			  PRIMARY KEY (`order_id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=utf8;	
+		</item>
+		<item for="install">
+			CREATE TRIGGER IF NOT EXISTS orders_after_insert 
+			AFTER INSERT ON ?:orders
+			FOR EACH ROW 
+				INSERT INTO `?:order_sync_queue`
+				VALUES (NEW.order_id);	
+		</item>
+		<item for="install">
+			CREATE TRIGGER IF NOT EXISTS orders_after_delete 
+			AFTER DELETE ON ?:orders
+			FOR EACH ROW 
+				DELETE FROM `?:order_sync_queue`
+				WHERE order_id = OLD.order_id;	
+		</item>
+		<!-- 
+		<item for="uninstall">ALTER TABLE `?:users` DROP `account_type`;</item>	
+		<item for="uninstall">DROP TABLE IF EXISTS ?:user_profile_phones;</item>
+		-->
+	</queries>
+	<functions>
+        <item for="install">fn_create_ordertracking_table</item>
+        <item for="install">fn_add_ordertracking_module</item>
+    </functions>	
+</addon>

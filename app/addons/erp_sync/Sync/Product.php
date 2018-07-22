@@ -134,6 +134,11 @@ class Product extends Master
 			
 			$product_id=fn_update_product($shop_data,$un['shop_product_id']);
 		
+			if(empty($un['shop_product_id'])) {
+				// 07/2018 enhmervse tis synueseis gia to neo product_id
+				db_query('UPDATE ?:package_products SET product_id = ?i WHERE product_code = ?s', $product_id, $code);
+			}
+		
 			if (empty($product_id)) throw new \Exception('Error syncing Product {'.var_export($un,true).'}');
 			
 			//------------------------------------------------------------------------------------------------------------------------------------------------

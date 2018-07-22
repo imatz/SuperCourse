@@ -12,29 +12,9 @@
 * "copyright.txt" FILE PROVIDED WITH THIS DISTRIBUTION PACKAGE.            *
 ****************************************************************************/
 
-namespace Sync;
+if (!defined('BOOTSTRAP')) { die('Access denied'); }
 
-class ProductPackage extends Master
-{
-  protected $table='';
-	protected $file='~package~';  
-  
-  
-  public function clear()  {    
-    if (!parent::clear()) return;  
-	// diagrafoyme tis quick synueseis
-    $data = $this->get_shop_clear_data();
-    foreach ($data as $dt)
-      fn_delete_product($dt);
-    // update to product_id se null stis standard gia na mh xauoyn ta proionta
-	db_query('UPDATE ?:package_products SET product_id = 0');
-  }  
-	
-  protected function get_shop_clear_data()
-	{
-    return db_get_fields("SELECT package_id 
-				FROM ?:package_data
-				WHERE creation='O'");
-	}
-	
-}
+fn_register_hooks(
+ 'get_orders',
+ 'get_order_info'
+);

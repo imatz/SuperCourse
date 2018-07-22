@@ -33,7 +33,9 @@ abstract class Master
 		'Sync\\State',
 		'Sync\\User',
 		'Sync\\Profile',
-		'Sync\\Phone'
+		'Sync\\Phone',
+		'Sync\\Voucher',
+		'Sync\\OrderTracking'
 	) ;
 	
   	private static $export_modules=array (

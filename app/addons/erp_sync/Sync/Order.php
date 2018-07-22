@@ -52,6 +52,8 @@ class Order extends Master
 			$u_id = db_get_field("SELECT user_id FROM ?:orders WHERE order_id = ?i", $id);
 			$fmail = db_get_field("SELECT fmail FROM ?:users WHERE user_id = ?i", $u_id);
 			$o['email'] = $fmail;
+			// ??? a.GIATI CAXNOYME TO USER_ID AFOY YPARXEI HDH STHN $o ??? 
+			// ??? b.DOYLEYEI AYTO GIA LIANIKHS ??? 
 			// nikosgkil
 
 			$export_no++;
@@ -95,8 +97,8 @@ class Order extends Master
 			//if (empty($insert_data['Paralhpths'])) $insert_data['Paralhpths'] =  trim($o['firstname'].' '.$o['lastname']);
 			
 			$this->insert_shop($insert_data);
-			
-			
+			// bgale ap thn oura toy sygxronismoy
+			db_query("DELETE FROM ?:order_sync_queue WHERE order_id=?i", $id);
 			
 			$detModule->csv_data = $o['products'];
 			$detModule->sync_bridge($export_no,$export_date);
@@ -139,7 +141,8 @@ class Order extends Master
 	
 	protected function get_unsynced_order_ids()
 	{
-		return db_get_fields("SELECT order_id FROM ?:orders WHERE order_id NOT IN (?n) AND status in ('O','P')", $this->get_synced_order_ids());
+		//return db_get_fields("SELECT order_id FROM ?:orders WHERE order_id NOT IN (?n) AND status in ('O','P')", $this->get_synced_order_ids());
+		return db_get_fields("SELECT order_id FROM ?:order_sync_queue WHERE order_id IN (SELECT order_id FROM ?:orders WHERE status IN ('O','P'))");
 	}
 	
 	protected function get_synced_order_ids() 
