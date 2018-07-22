@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<addon scheme="2.0">
+    <id>my_order_vouchers</id>
+    <name>ioannis m.: My Order Vouchers</name>
+    <description>View erp order vouchers</description>
+	<compatibility>
+        <dependencies>erp_sync, my_order_progress</dependencies>
+	</compatibility>
+    <version>1.0</version>
+    <priority>200002</priority>
+    <position>0</position>
+    <auto_install>MULTIVENDOR,ULTIMATE</auto_install>
+    <default_language>en</default_language>
+    <status>active</status>
+	<translations>
+    	<item for="name" lang="el">ioannis m.: Παραστατικά Παραγγελιών</item>
+        <item for="description" lang="el">Προβολή παραστατικών παραγγελιών από erp στο frontend</item>
+    </translations>
+	<functions>
+        <item for="install">fn_add_voucher_module</item>
+        <item for="install">fn_create_voucher_table</item>
+    </functions>
+	 
+    <language_variables>
+		<item lang="en" id="order_vouchers">Order Vouchers</item>	
+		<item lang="el" id="order_vouchers">Παραστατικά Παραγγελιών</item>	
+    </language_variables>
+	</addon>
+	
+	
+	
