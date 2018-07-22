@@ -37,6 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$user_data['fields'][$parathrhseis_id]=$_REQUEST['user_data']['fields'][$parathrhseis_id];
 		$_REQUEST['user_data']=$user_data;
 		
+	// pleon h allagh stopixeivn ginetai me th morfh aithshs mesv mail
+	
   } else if ($mode == 'choose') {
     if(isset($_REQUEST['profile_id']))
       $profile_id = (int)$_REQUEST['profile_id']; //briskei to profile_id me to opoio exei kanei login o xristis
