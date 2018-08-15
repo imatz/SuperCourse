@@ -11,7 +11,7 @@ use Sync\DB;
 function fn_add_voucher_module()
 {
 	DB::use_bridge();
-	db_query('INSERT INTO modules (module, status, begin_timestamp, end_timestamp, last_activity_timestamp) VALUES (?s, ?s, 0, 0, 0)','Voucher', 'I');
+	db_query("INSERT INTO modules (module, status, begin_timestamp, end_timestamp, last_activity_timestamp) VALUES ('Voucher', 'I', 0, 0, 0)");
 	DB::use_shop();
 }
 
