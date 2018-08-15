@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           'tpl' => 'addons/my_users/update_user_info_request.tpl'
 		), 'A', Registry::get('settings.Appearance.backend_default_language'));
   
-		fn_set_notification('N', __('notice'), __('text_user_info_submitted'), 'I', 'notice_user_info_submitted');
+		fn_set_notification('N', __('notice'), __('text_user_info_submitted'));
      
 		return array(CONTROLLER_STATUS_OK, 'index');
 	}
