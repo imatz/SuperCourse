@@ -5,3 +5,4 @@
 *.log
 .vagrant/
 config.local.php
+bridge23f/
