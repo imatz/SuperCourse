@@ -22,7 +22,7 @@ function fn_create_ordertracking_table()
 function fn_add_ordertracking_module()
 {
 	DB::use_bridge();
-	db_query('INSERT INTO modules (module, status, begin_timestamp, end_timestamp, last_activity_timestamp) VALUES (?s, ?s, 0, 0, 0)','OrderTracking', 'I');
+	db_query("INSERT INTO modules (module, status, begin_timestamp, end_timestamp, last_activity_timestamp) VALUES ('OrderTracking', 'I', 0, 0, 0)");
 	DB::use_shop();
 }
 

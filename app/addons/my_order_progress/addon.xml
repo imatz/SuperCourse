@@ -36,6 +36,8 @@
 		<item for="install">
 			ALTER TABLE `?:package_products` 
 			ADD COLUMN `product_code` VARCHAR(32) NULL AFTER `product_id`;
+		</item>
+		<item for="install">	
 			UPDATE `?:package_products` pp 
 			INNER JOIN `?:products` p ON pp.product_id = p.product_id 
 			SET pp.product_code = p.product_code
@@ -43,6 +45,8 @@
 		<item for="install">
 			ALTER TABLE `?:package_data` 
 			ADD COLUMN `user_login` INT NULL DEFAULT 0 AFTER `c_discount_value`;
+		</item>
+		<item for="install">
 			UPDATE `?:package_data` o
 			INNER JOIN `?:users` u ON o.user_id = u.user_id AND o.user_login != u.user_login
 			SET o.user_login = u.user_login;
@@ -50,18 +54,24 @@
 		<item for="install">
 			ALTER TABLE `?:orders` 
 			ADD COLUMN `user_login` INT NULL DEFAULT 0 AFTER `delivery_notes`;
+		</item>
+		<item for="install">
 			ALTER TABLE `?:orders` 
 			ADD COLUMN `tracking_code` VARCHAR(512) NULL DEFAULT '' AFTER `delivery_notes`;
+		</item>
+		<item for="install">
 			UPDATE `?:orders` o
 			INNER JOIN `?:users` u ON o.user_id = u.user_id AND o.user_login != u.user_login
 			SET o.user_login = u.user_login;
 		</item>
 		<item for="install">
 			ALTER TABLE `?:shippings` 
-			ADD COLUMN `tracking_url` IF NOT EXISTS VARCHAR(512) NULL DEFAULT '' AFTER `status`;
+			ADD COLUMN `tracking_url` VARCHAR(512) NULL DEFAULT '' AFTER `status`;
 		</item>
 		<item for="install">
 			INSERT INTO `?:statuses` (`status`, `type`, `is_default`) VALUES ('E', 'O', 'Y');
+		</item>
+		<item for="install">	
 			INSERT INTO `?:status_descriptions` (`status`, `type`, `description`, `lang_code`) VALUES ('E', 'O', 'Εισαγωγή από ERP', 'el');
 		</item>
 		<item for="install">
