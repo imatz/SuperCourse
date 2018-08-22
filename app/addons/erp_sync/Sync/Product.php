@@ -121,14 +121,17 @@ class Product extends Master
 			);		
 			
 			// usergroups
+			$cGroup = trim($un['CustomerGroup']);
 			
-			if (!empty($un['CustomerGroup'])) {
-				$tmp = explode(',', $un['CustomerGroup']);
+			if (!empty($cGroup)) {
+				$tmp = explode(',', $cGroup);
 				foreach ($tmp as $t) {
 					if (!empty($Customergroup_map[$t])) {
 						$shop_data['usergroup_ids'][] = $Customergroup_map[$t];
 					}
 				}
+			} else { //noone
+				$shop_data['usergroup_ids'][] = $Customergroup_map['N'];
 			}
 			
 			
@@ -439,6 +442,7 @@ WHERE product_id = '$product_id' AND (SELECT creation FROM cscart_package_data W
 	{
 		$data=array();
 		$data['R'] = array('CustomerGroup'=>'R'); // Lianikh einai standard
+		$data['Ν'] = array('CustomerGroup'=>'N'); // Noone an den steilei kati
 		try {
 			Db::use_bridge();
 			$result=db_get_array("SELECT DISTINCT CustomerGroup FROM {$this->table} WHERE IFNULL(shop_updated,0)=0 AND erp_updated=1 AND CustomerGroup IS NOT NULL AND CustomerGroup <> ''");
