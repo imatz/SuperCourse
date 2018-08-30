@@ -410,13 +410,11 @@ WHERE product_id = '$product_id' AND (SELECT creation FROM cscart_package_data W
 			{
 				$url=$base_image_url.$un['ico1'];
 				$this->updateImagePair($product_id, $url, 'M', $un['name']);
-			}
-			
-			$un['shop_prices']=json_encode($un['prices']);
-			$un['shop_product_id']=$product_id;
-			$this->update_shop(array('Code'=>$un['Code']), $un);
-			
+			}		
 		   }
+		$un['shop_prices']=json_encode($un['prices']);
+		$un['shop_product_id']=$product_id;
+		$this->update_shop(array('Code'=>$un['Code']), $un);	
 		}
 		echo '.. shop synced Products ..<br>';
 
