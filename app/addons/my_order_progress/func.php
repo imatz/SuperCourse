@@ -28,8 +28,8 @@ function fn_add_ordertracking_module()
 
 function fn_my_order_progress_get_orders($params, &$fields, $sortings, $condition, &$join, $group)
 {
-	$join .= " LEFT JOIN ?:order_sync_queue osq ON ?:orders.order_id=osq.order_id";
-	$fields []= "osq.order_id AS unsynced";
+	$join .= " LEFT JOIN ?:order_sync_queue osq ON ?:orders.order_id=osq.order_id LEFT JOIN ?:users u ON ?:orders.user_login=u.user_login";
+	$fields []= "osq.order_id AS unsynced, u.fmail";
 	if ('C' == AREA) {
 		// den ua xrhsimopoihuei
 	//	$join .= " LEFT JOIN ?:shippings sh ON ?:orders.shipping_ids=sh.shipping_id";

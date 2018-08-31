@@ -31,8 +31,8 @@
             <td class="ty-orders-search__item"><strong>#{$o.order_id}</strong></td>
             <td class="ty-orders-search__item">
                 <ul class="ty-orders-search__user-info">
-                    <li class="ty-orders-search__user-name">{$o.firstname} {$o.lastname}</li>
-                    <li  class="ty-orders-search__user-mail"><a href="mailto:{$o.email|escape:url}">{$o.email}</a></li>
+                    <li class="ty-orders-search__user-name">{$o.firstname}</li>
+                    <li  class="ty-orders-search__user-mail"><a href="mailto:{$o.fmail|escape:url}">{$o.email}</a></li>
                 </ul>
             </td>
             <td class="ty-orders-search__item"><a href="{"orders.details?order_id=`$o.order_id`"|fn_url}">{$o.timestamp|date_format:"`$settings.Appearance.date_format`, `$settings.Appearance.time_format`"}</a></td>
